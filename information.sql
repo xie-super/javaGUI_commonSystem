@@ -46,7 +46,7 @@ CREATE TABLE sport (
 );
 DROP TABLE IF EXISTS `sportinformation`;
 CREATE TABLE sportinformation (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255) ,
     sportId VARCHAR(255),
     mark INT,
     startTime VARCHAR(50),
@@ -142,8 +142,8 @@ VALUES ('S1', '篮球', '2023-01-01 10:00:00', '2023-01-01 12:00:00', '团队'),
 
 -- 插入数据到 sportinformation 表
 INSERT INTO sportinformation (id, sportId, mark, startTime, adminUsername)
-VALUES ('SI1', 'S1', 95, '2023-01-01 10:00:00', '管理员1'),
-       ('SI2', 'S2', 90, '2023-01-02 11:00:00', '管理员2');
+VALUES ('1', 'S1', 95, '2023-01-01 10:00:00', '管理员1'),
+       ('1', 'S2', 90, '2023-01-02 11:00:00', '管理员2');
 
 -- 插入数据到 student 表
 INSERT INTO student (id, name, sex, clazz, password, isRegister)
