@@ -1,6 +1,8 @@
 package com.achieve.service;
 
 
+import com.achieve.DB;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,20 +13,7 @@ public class StudentInformationsql {
     public static Object[][] studata = new Object[99][5];
 
     private static Connection getConn() {
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://150.158.173.160:3306/science?serverTimezone=UTC";
-        String username = "science";
-        String password = "2etebKAnxrN3ct5W";
-        Connection conn = null;
-        try {
-            Class.forName(driver); //classLoader,加载对应驱动
-            conn = (Connection) DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conn;
+        return DB.getConn();
     }
 
 

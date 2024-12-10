@@ -301,4 +301,9 @@ public class Login {
         g2d.dispose();
         return image;
     }
+
+    public static void main(String[] args) {
+        Login login = new Login();
+        login.show();
+    }
 }

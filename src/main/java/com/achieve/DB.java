@@ -15,7 +15,7 @@ import java.util.List;
 public class DB {
     public static Connection getConn() {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://150.158.173.160:3306/gui?serverTimezone=UTC";
+        String url = "jdbc:mysql://8.141.119.45:3306/gui?serverTimezone=UTC";
         String username = "gui";
         String password = "jHd5HpNx8dzj84RR";
         Connection conn = null;
@@ -268,10 +268,10 @@ public class DB {
         //insert(student);
         student2.setSex("男");
         //System.out.println(delete(student, "name"));
-        /*List<Student> list = select(student2,"sex");
+        List<Student> list = select(student2,"sex");
         for(Student s:list){
             System.out.println(s.toString());
-        }*/
+        }
         //update(student,"id");
     }
 }

@@ -66,7 +66,7 @@ CREATE TABLE `student` (
   `name` varchar(20) DEFAULT NULL,
   `sex` varchar(4) DEFAULT NULL,
   `clazz` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL
+  `password` varchar(20) DEFAULT NULL,
   `isRegister` int
 ) ;
 
@@ -112,7 +112,7 @@ CREATE TABLE `teacher` (
   `name` varchar(20) DEFAULT NULL,
   `title` varchar(10) DEFAULT NULL,
   `sex` varchar(5) DEFAULT NULL,
-  `phone` int DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
@@ -120,7 +120,7 @@ CREATE TABLE `teacher` (
 
 -- Dump completed on 2020-10-23 16:38:45
 -- 插入数据到 admin 表
-INSERT INTO admin (username, password) VALUES ('管理员1', '密码1'), ('管理员2', '密码2');
+INSERT INTO admin (username, password) VALUES ('admin', '123456'), ('管理员2', '密码2');
 
 -- 插入数据到 notice 表
 INSERT INTO notice (title, content, createTime, creator, type, modifier)
