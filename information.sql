@@ -4,24 +4,25 @@
 -- ------------------------------------------------------
 -- Server version	8.0.20
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
 --
 -- Table structure for table `project`
 --
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE admin (
+    username VARCHAR(255) PRIMARY KEY,
+    password VARCHAR(255)
+);
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE notice (
+    title VARCHAR(255) PRIMARY KEY,
+    content TEXT,
+    createTime DATETIME,
+    creator VARCHAR(255),
+    type VARCHAR(255),
+    modifier VARCHAR(255)
+);
 
 DROP TABLE IF EXISTS `project`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `project` (
   `id` int DEFAULT NULL,
   `title` varchar(20) DEFAULT NULL,
@@ -29,49 +30,59 @@ CREATE TABLE `project` (
   `studentName` varchar(20) DEFAULT NULL,
   `mark` int DEFAULT NULL
 ) ;
-/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `open`;
+CREATE TABLE open (
+    ifopen INT,
+    flag INT PRIMARY KEY
+);
 
+DROP TABLE IF EXISTS `sport`;
+CREATE TABLE sport (
+    sportId VARCHAR(255) PRIMARY KEY,
+    sportName VARCHAR(255),
+    startTime VARCHAR(50),
+    endTime VARCHAR(50),
+    type VARCHAR(50)
+);
+DROP TABLE IF EXISTS `sportinformation`;
+CREATE TABLE sportinformation (
+    id VARCHAR(255) PRIMARY KEY,
+    sportId VARCHAR(255),
+    mark INT,
+    startTime VARCHAR(50),
+    adminUsername VARCHAR(255)
+);
 --
 -- Dumping data for table `project`
 --
-
-LOCK TABLES `project` WRITE;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `student`
 --
 
 DROP TABLE IF EXISTS `student`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `student` (
   `id` int DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `sex` varchar(4) DEFAULT NULL,
   `clazz` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL
+  `isRegister` int
 ) ;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `student`
 --
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `titletable`
 --
 
 DROP TABLE IF EXISTS `titletable`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `titletable` (
   `title` varchar(20) DEFAULT NULL,
   `initiator` varchar(20) DEFAULT NULL,
@@ -81,25 +92,21 @@ CREATE TABLE `titletable` (
   `date` varchar(20) DEFAULT NULL,
   `classroom` varchar(20) DEFAULT NULL
 ) ;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `titletable`
 --
 
-LOCK TABLES `titletable` WRITE;
-/*!40000 ALTER TABLE `titletable` DISABLE KEYS */;
+
 INSERT INTO `titletable` VALUES ('数据结构','赵四','二年级',1102,'李土土','星期一','1-111'),('Java','王五','一年级',1101,'张三',NULL,NULL),('Java','王五',NULL,NULL,NULL,NULL,NULL),('c++','张三',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `titletable` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `teacher`
 --
 
 DROP TABLE IF EXISTS `teacher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `teacher` (
   `id` int NOT NULL,
   `name` varchar(20) DEFAULT NULL,
@@ -109,24 +116,41 @@ CREATE TABLE `teacher` (
   `password` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `teacher`
---
-
-LOCK TABLES `teacher` WRITE;
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2020-10-23 16:38:45
+-- 插入数据到 admin 表
+INSERT INTO admin (username, password) VALUES ('管理员1', '密码1'), ('管理员2', '密码2');
+
+-- 插入数据到 notice 表
+INSERT INTO notice (title, content, createTime, creator, type, modifier)
+VALUES ('通知1', '这是第一条通知内容', '2023-01-01 10:00:00', '用户1', '类型1', '修改者1'),
+       ('通知2', '这是第二条通知内容', '2023-01-02 11:00:00', '用户2', '类型2', '修改者2');
+
+-- 插入数据到 project 表
+INSERT INTO project (id, title, initiator, studentName, mark)
+VALUES (1, '项目1', '发起人1', '学生1', 90),
+       (2, '项目2', '发起人2', '学生2', 85);
+
+-- 插入数据到 open 表
+INSERT INTO open (ifopen, flag) VALUES (1, 101), (0, 102);
+
+-- 插入数据到 sport 表
+INSERT INTO sport (sportId, sportName, startTime, endTime, type)
+VALUES ('S1', '篮球', '2023-01-01 10:00:00', '2023-01-01 12:00:00', '团队'),
+       ('S2', '游泳', '2023-01-02 11:00:00', '2023-01-02 13:00:00', '个人');
+
+-- 插入数据到 sportinformation 表
+INSERT INTO sportinformation (id, sportId, mark, startTime, adminUsername)
+VALUES ('SI1', 'S1', 95, '2023-01-01 10:00:00', '管理员1'),
+       ('SI2', 'S2', 90, '2023-01-02 11:00:00', '管理员2');
+
+-- 插入数据到 student 表
+INSERT INTO student (id, name, sex, clazz, password, isRegister)
+VALUES (1, 'student1', '男', '班级A', '密码1', 1),
+       (2, 'student2', '女', '班级B', '密码2', 0);
+
+-- 插入数据到 teacher 表
+INSERT INTO teacher (id, name, title, sex, phone, password)
+VALUES (1, 'teacher1', '教授', '男', 1234567890, '密码1'),
+       (2, 'teacher2', '副教授', '女', 9876543210, '密码2');

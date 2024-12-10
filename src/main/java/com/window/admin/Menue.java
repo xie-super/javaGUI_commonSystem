@@ -2,21 +2,18 @@ package com.window.admin;
 
 
 import com.achieve.DB;
-import com.achieve.entity.*;
-import com.window.Login;
-
+import com.achieve.entity.Open;
+import com.achieve.entity.Sport;
+import com.achieve.entity.Student;
+import com.achieve.entity.Teacher;
 import com.window.common.GenericModifyPanel;
-import com.window.common.GenericTablePanel;
-import javafx.scene.effect.Light;
 import lombok.SneakyThrows;
-import java.util.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menue {
     private JFrame jFrame;

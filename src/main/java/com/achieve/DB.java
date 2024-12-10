@@ -15,9 +15,9 @@ import java.util.List;
 public class DB {
     public static Connection getConn() {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://150.158.173.160:3306/commonsystem?serverTimezone=UTC";
-        String username = "commonSystem";
-        String password = "yakRXy6MirPShTHP";
+        String url = "jdbc:mysql://150.158.173.160:3306/gui?serverTimezone=UTC";
+        String username = "gui";
+        String password = "jHd5HpNx8dzj84RR";
         Connection conn = null;
         try {
             Class.forName(driver); //classLoader,加载对应驱动
