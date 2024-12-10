@@ -147,10 +147,10 @@ VALUES ('SI1', 'S1', 95, '2023-01-01 10:00:00', '管理员1'),
 
 -- 插入数据到 student 表
 INSERT INTO student (id, name, sex, clazz, password, isRegister)
-VALUES (1, 'student1', '男', '班级A', '密码1', 1),
-       (2, 'student2', '女', '班级B', '密码2', 0);
+VALUES (1, 'student1', '男', '班级A', '123456', 1),
+       (2, 'student2', '女', '班级B', '123456', 0);
 
 -- 插入数据到 teacher 表
 INSERT INTO teacher (id, name, title, sex, phone, password)
-VALUES (1, 'teacher1', '教授', '男', 1234567890, '密码1'),
-       (2, 'teacher2', '副教授', '女', 9876543210, '密码2');
+VALUES (1, 'teacher1', '教授', '男', 1234567890, '123456'),
+       (2, 'teacher2', '副教授', '女', 9876543210, '123456');
