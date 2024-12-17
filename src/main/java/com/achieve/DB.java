@@ -51,6 +51,8 @@ public class DB {
         rs.close();
         stmt.close();
         conn.close();
+        String tableName = tableNames.get(0);
+        getColumnInfo(tableName);
 
         return tableNames;
     }
@@ -76,6 +78,32 @@ public class DB {
 
         conn.close();
     }
+
+    public static List<Map<String, Object>> getColumnInfo(String tableName) throws Exception {
+        Connection conn = getConn();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(
+                "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT " +
+                        "FROM INFORMATION_SCHEMA.COLUMNS " +
+                        "WHERE TABLE_SCHEMA = 'gui' AND TABLE_NAME = '" + tableName + "'"
+        );
+
+        List<Map<String, Object>> columnInfos = new ArrayList<>();
+        while (rs.next()) {
+            Map<String, Object> columnInfo = new HashMap<>();
+            columnInfo.put("COLUMN_NAME", rs.getString("COLUMN_NAME"));
+            columnInfo.put("DATA_TYPE", rs.getString("DATA_TYPE"));
+            columnInfo.put("COLUMN_COMMENT", rs.getString("COLUMN_COMMENT"));
+            columnInfos.add(columnInfo);
+        }
+
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return columnInfos;
+    }
+
 
     //实现所有类型的插入操作
     public static <T> boolean insert(T entity) throws SQLException {
@@ -308,7 +336,7 @@ public class DB {
         }
     }
     public static void main(String[] args) throws Exception {
-        getDataForTableAndFormDomain();
+        getAllTableNames();
         /*Student student = new Student(1,"2s","3s","4s","5s");
         Information project = new Information(1,"as","bs","cs",2);
         */
