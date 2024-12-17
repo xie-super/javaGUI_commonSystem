@@ -10,9 +10,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DB {
+
     public static Connection getConn() {
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://8.141.119.45:3306/gui?serverTimezone=UTC";
@@ -28,6 +35,46 @@ public class DB {
             e.printStackTrace();
         }
         return conn;
+    }
+
+
+    public static List<String> getAllTableNames() throws Exception {
+        Connection conn = getConn();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SHOW TABLES");
+
+        List<String> tableNames = new ArrayList<>();
+        while (rs.next()) {
+            tableNames.add(rs.getString(1));
+        }
+        log.info("table info: {}", tableNames);
+        rs.close();
+        stmt.close();
+        conn.close();
+
+        return tableNames;
+    }
+
+    public static void getDataForTableAndFormDomain() throws Exception {
+        List<String> tableNames = getAllTableNames();
+        Connection conn = getConn();
+        for (String tableName : tableNames) {
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM `" + tableName + "`");
+            ResultSet rs = pstmt.executeQuery();
+
+            List<Map<String, Object>> results = new ArrayList<>();
+            while (rs.next()) {
+                Map<String, Object> row = new HashMap<>();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    row.put(rs.getMetaData().getColumnName(i), rs.getObject(i));
+                }
+                results.add(row);
+            }
+            rs.close();
+            pstmt.close();
+        }
+
+        conn.close();
     }
 
     //实现所有类型的插入操作
@@ -260,7 +307,8 @@ public class DB {
             connection.close();
         }
     }
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception {
+        getDataForTableAndFormDomain();
         /*Student student = new Student(1,"2s","3s","4s","5s");
         Information project = new Information(1,"as","bs","cs",2);
         */
