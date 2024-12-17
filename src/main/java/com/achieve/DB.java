@@ -13,18 +13,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
-import com.alibaba.fastjson.JSONObject;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DB {
 
     public static Connection getConn() {
+//        String driver = "com.mysql.cj.jdbc.Driver";
+//        String url = "jdbc:mysql://8.141.119.45:3306/gui?serverTimezone=UTC";
+//        String username = "gui";
+//        String password = "jHd5HpNx8dzj84RR";
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://8.141.119.45:3306/gui?serverTimezone=UTC";
-        String username = "gui";
-        String password = "jHd5HpNx8dzj84RR";
+        String url = "jdbc:mysql://8.141.119.45:3306/car_rental_system?serverTimezone=UTC";
+        String username = "car_rental_system";
+        String password = "zSJKRmBNFDx2dnXE";
         Connection conn = null;
         try {
             Class.forName(driver); //classLoader,加载对应驱动
