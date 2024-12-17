@@ -59,7 +59,7 @@ public class GenericModifyPanel<T> {
         String tableName = entity.getClass().getSimpleName().toLowerCase();
 
 
-        tabbedPane.addTab("修改"+AttributeMapper.mapAttributeToField(tableName), modifyPanel);
+        tabbedPane.addTab("修改1"+AttributeMapper.mapAttributeToField(tableName), modifyPanel);
 
         jPanel.add(tabbedPane, BorderLayout.CENTER);
 

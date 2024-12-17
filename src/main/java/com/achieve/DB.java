@@ -82,7 +82,7 @@ public class DB {
             e.printStackTrace();
             // 输出SQL异常信息
             System.err.println("SQL Exception: " + e.getMessage());
-            return false; // 返回插入失败的标志
+            return false;
         } finally {
             connection.close();
         }
@@ -97,8 +97,8 @@ public class DB {
         try {
             connection = getConn();
 
-                    // 获取实体类的所有字段
-                    Field[] fields = entity.getClass().getDeclaredFields();
+            // 获取实体类的所有字段
+            Field[] fields = entity.getClass().getDeclaredFields();
 
             // 获取实体类的类名并转换为小写
             String tableName = entity.getClass().getSimpleName().toLowerCase();
@@ -107,7 +107,7 @@ public class DB {
             StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
 
             for (Field field : fields) {
-                field.setAccessible(true); // 设置字段可访问
+                field.setAccessible(true);
                 Object value = field.get(entity);
 
                 if (value != null) {

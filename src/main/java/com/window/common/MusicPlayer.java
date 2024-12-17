@@ -1,5 +1,6 @@
 package com.window.common;
 // 导入swing库
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
