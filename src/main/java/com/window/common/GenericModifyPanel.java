@@ -1,25 +1,25 @@
 package com.window.common;
+
 import com.achieve.DB;
 import com.achieve.entity.Student;
 import com.util.data.AttributeMapper;
 import lombok.SneakyThrows;
-import org.apache.poi.ss.formula.functions.T;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 public class GenericModifyPanel<T> {
     private JFrame jFrame;
@@ -73,11 +73,66 @@ public class GenericModifyPanel<T> {
         try {
             // Assuming T has a setter method for the property (e.g., setName())
             Method setterMethod = findSetterMethod(entity.getClass(), propertyName);
+            Class<?>[] parameterTypes = setterMethod.getParameterTypes();
+            System.out.printf(setterMethod.getName());
             if (setterMethod != null) {
-                setterMethod.invoke(entity, value);
+                Object convertedValue = convertValue(value, parameterTypes[0]);
+
+                // Invoke the setter method with the converted value
+                setterMethod.invoke(entity, convertedValue);
             }
         } catch (IllegalAccessException | InvocationTargetException ex) {
             ex.printStackTrace(); // Handle the exception appropriately
+        }
+    }
+
+    // Utility method for converting the value to the appropriate type
+    private Object convertValue(Object value, Class<?> targetType) {
+        if (value == null) {
+            return null;
+        }
+
+        // If the value is already the correct type, return it as is
+        if (targetType.isInstance(value)) {
+            return value;
+        }
+
+        // Perform type conversion based on targetType
+        if (targetType == int.class || targetType == Integer.class) {
+            return Integer.valueOf(value.toString());
+        } else if (targetType == long.class || targetType == Long.class) {
+            return Long.valueOf(value.toString());
+        } else if (targetType == double.class || targetType == Double.class) {
+            return Double.valueOf(value.toString());
+        } else if (targetType == float.class || targetType == Float.class) {
+            return Float.valueOf(value.toString());
+        } else if (targetType == boolean.class || targetType == Boolean.class) {
+            return Boolean.valueOf(value.toString());
+        } else if (targetType == String.class) {
+            return value.toString();
+        } else if (targetType == BigDecimal.class) {
+            // Convert String to BigDecimal
+            if (value instanceof String) {
+                return new BigDecimal((String) value);
+            } else {
+                throw new IllegalArgumentException("Cannot convert value of type " + value.getClass() + " to BigDecimal");
+            }
+        }else if (targetType == Date.class) {
+            if (value instanceof String) {
+                // Parse the String into a Date using SimpleDateFormat
+                try {
+                    String dateString = (String) value;
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // Adjust format as needed
+                    return sdf.parse(dateString);
+                } catch (ParseException e) {
+                    throw new IllegalArgumentException("Cannot convert value of type " + value.getClass() + " to Date", e);
+                }
+            } else {
+                throw new IllegalArgumentException("Cannot convert value of type " + value.getClass() + " to Date");
+            }
+        }else {
+            // You can add more type conversions as necessary
+            throw new IllegalArgumentException("Cannot convert value of type " + value.getClass() + " to " + targetType);
         }
     }
 

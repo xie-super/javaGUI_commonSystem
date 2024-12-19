@@ -1,32 +1,25 @@
 package com.achieve.entity;
-import java.util.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Stack;
-import java.util.Vector;
-
-@Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
-
-public class Admin {
-    private int adminId;
+public class User {
+    private int userId;
     private String username;
     private String password;
+    private String email;
 
-    // Getters and Setters
-    public int getAdminId() {
-        return adminId;
+    public User(String username) {
+        this.username = username;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    // Getters and Setters
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -43,6 +36,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

@@ -2,11 +2,10 @@ package com.window.admin;
 
 
 import com.achieve.DB;
-import com.achieve.entity.Open;
-import com.achieve.entity.Sport;
-import com.achieve.entity.Student;
-import com.achieve.entity.Teacher;
+import com.achieve.entity.*;
+import com.util.data.Cookie;
 import com.window.common.GenericModifyPanel;
+import com.window.common.GenericTablePanel;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -24,10 +23,10 @@ public class Menue {
     private JButton studentInfButton;
     private JButton teacherInfButton;
     private JButton infStatisticsButton;
-    private JButton ifOpenButton;
+    //private JButton ifOpenButton;
     private JButton clazzStatisticsButton;
-    private JButton getAll;
-    private JButton fenshu;
+    //private JButton getAll;
+   // private JButton fenshu;
 
 
     private JButton noticeButton;
@@ -53,53 +52,58 @@ public class Menue {
 
         jPanel.add(splitPane, BorderLayout.CENTER);
 
-        studentInfButton = new JButton("学生信息");
+        studentInfButton = new JButton("汽车信息");
         studentInfButton.setBackground(new Color(255, 255, 255)); // 暖色按钮背景色
         studentInfButton.setForeground(Color.RED);
         studentInfButton.addActionListener(new ActionListener() {
             @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] heard = {"id", "name", "sex", "clazz", "password"};
-                GenericModifyPanel<Student> tablePanel = new GenericModifyPanel<>();
-                tablePanel.show(heard, new Student(), "");
+                String[] heard = {"carId", "model", "status", "rentPrice"};
+                GenericModifyPanel<Car> tablePanel = new GenericModifyPanel<>();
+                Car car = new Car();
+                tablePanel.show(heard, car, "");
             }
         });
-        infStatisticsButton = new JButton("查询和统计汇总");
+        infStatisticsButton = new JButton("租赁信息");
         infStatisticsButton.setBackground(new Color(255, 255, 255)); // 暖色按钮背景色
         infStatisticsButton.setForeground(Color.RED);
         infStatisticsButton.addActionListener(new ActionListener() {
             @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Top8InfPanel();
+                String[] heard = {"userId", "carId", "startDate", "endDate", "totalCost"};
+                GenericModifyPanel<RentalRecord> tablePanel = new GenericModifyPanel<>();
+                tablePanel.show(heard, new RentalRecord(),"");
             }
         });
-        clazzStatisticsButton = new JButton("学院统计");
+        clazzStatisticsButton = new JButton("维修统计");
         clazzStatisticsButton.setBackground(new Color(255, 255, 255)); // 暖色按钮背景色
         clazzStatisticsButton.setForeground(Color.RED);
         clazzStatisticsButton.addActionListener(new ActionListener() {
             @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ClazzInfPanel();
+                String[] heard = {"maintenanceId", "carId", "faultReason", "repairStartTime", "repairEndTime"};
+                GenericModifyPanel<MaintenanceRecord> tablePanel = new GenericModifyPanel<>();
+                tablePanel.show(heard, new MaintenanceRecord(),"");
             }
 
 
         });
-        teacherInfButton = new JButton("教师信息");
+        teacherInfButton = new JButton("收益信息");
         teacherInfButton.setBackground(new Color(255, 255, 255)); // 暖色按钮背景色
         teacherInfButton.setForeground(Color.RED);
         teacherInfButton.addActionListener(new ActionListener() {
             @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] heard = {"id", "name", "title", "sex","phone", "password"};
-                GenericModifyPanel<Teacher> tablePanel = new GenericModifyPanel<>();
-                tablePanel.show(heard, new Teacher(), "");
+                String[] heard = {"analysisId", "dateRange", "profitAmount"};
+                GenericModifyPanel<ProfitAnalysis> tablePanel = new GenericModifyPanel<>();
+                tablePanel.show(heard, new ProfitAnalysis(),"");
             }
         });
-        getAll = new JButton("运动项目信息");
+        /*getAll = new JButton("运动项目信息");
         getAll.setBackground(new Color(255, 255, 255)); // 暖色按钮背景色
         getAll.setForeground(Color.RED);
         getAll.addActionListener(new ActionListener() {
@@ -154,19 +158,19 @@ public class Menue {
                     DB.update(open,"flag");
                 }
             }
-        });
+        });*/
 
 
 
         leftPanel.add(studentInfButton);
         leftPanel.add(teacherInfButton);
-        leftPanel.add(getAll);
-        leftPanel.add(fenshu);
+        //leftPanel.add(getAll);
+       // leftPanel.add(fenshu);
         leftPanel.add(infStatisticsButton);
         leftPanel.add(clazzStatisticsButton);
 
-        leftPanel.add(noticeButton);
-        leftPanel.add(ifOpenButton);
+        //leftPanel.add(noticeButton);
+        //leftPanel.add(ifOpenButton);
 
         return jPanel;
     }

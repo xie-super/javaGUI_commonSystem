@@ -15,4 +15,8 @@ import lombok.NoArgsConstructor;
 public class Open {
     Integer ifopen;
     Integer flag;
+
+    public int getIfopen() {
+        return ifopen;
+    }
 }

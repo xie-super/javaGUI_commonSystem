@@ -1,10 +1,7 @@
 package com.window;
 
 import com.achieve.DB;
-import com.achieve.entity.Admin;
-import com.achieve.entity.SportInformation;
-import com.achieve.entity.Student;
-import com.achieve.entity.Teacher;
+import com.achieve.entity.*;
 import com.achieve.service.StudentInformationsql;
 import com.util.data.CommonData;
 import com.util.data.Cookie;
@@ -40,7 +37,7 @@ public class Login {
 
     // 添加角色选择下拉框和变量
     private JComboBox<String> roleComboBox;
-    private String selectedRole = "学生";
+    private String selectedRole = CommonData.roles[0];
 
     private DB db = new DB();
     public void show() {
@@ -167,8 +164,7 @@ public class Login {
             @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
-                StudentInformationsql.getAll();
-                String userId = idtxt.getText();
+                String username = idtxt.getText();
                 String password = passwordtxt.getText();
                 String enteredCaptcha = captchaField.getText();
                 if (false && !enteredCaptcha.equalsIgnoreCase(captchaCode)) {
@@ -176,35 +172,16 @@ public class Login {
                 } else {
                     System.out.println(selectedRole);
                     // 根据选择的角色执行不同的登录逻辑
-                    if ("学生".equals(selectedRole)) {
-                        Student tmpStudent = new Student();
-                        tmpStudent.setId(userId);
+                    if ("用户".equals(selectedRole)) {
+                        User user = new User();
+                        user.setUsername(username);
                         try {
-                            List<Student> list = DB.select(tmpStudent, "id");
+                            List<User> list = DB.select(user, "username");
                             if (list.size() != 0 && list.get(0).getPassword().equals(password)) {
                                 Cookie cookie = Cookie.getInstance();
                                 cookie.setAccountType(Cookie.AccountType.STUDENT);
-                                cookie.setUsername(list.get(0).getName());
-
-                                // 获取所有比赛信息
-                                List<SportInformation> sportInformationList = DB.select(new SportInformation(), "");
-
-                                // 获取当前登录学生的报名信息
-                                List<SportInformation> studentSportInfoList = sportInformationList.stream()
-                                        .filter(info -> info.getId().equals(userId))
-                                        .collect(Collectors.toList());
-
-                                // 检查今天和明天是否有比赛，如果有，则提醒
-                                for (SportInformation studentSportInfo : studentSportInfoList) {
-                                    String formattedDateString = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-                                    // 检查比赛日期是否为今天或明天
-                                    if (studentSportInfo.getStartTime().equals(formattedDateString) || studentSportInfo.getStartTime().equals(java.time.LocalDate.now().plusDays(1).format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")))) {
-                                        JOptionPane.showMessageDialog(jFrame, "您有比赛明天，请注意准备！", "比赛提醒", JOptionPane.INFORMATION_MESSAGE);
-                                        break;  // 只提醒一次即可
-                                    }
-                                }
-
+                                cookie.setUsername(list.get(0).getUsername());
+                                cookie.setUserId(list.get(0).getUserId());
                                 new com.window.student.Menue().show();
                                 jFrame.setVisible(false);
                             }else{
@@ -213,49 +190,15 @@ public class Login {
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-                    } if ("教师".equals(selectedRole)) {
-                        Teacher tmpTeacher = new Teacher();
-                        tmpTeacher.setId(userId);
-                        try {
-                            List<Teacher> list = DB.select(tmpTeacher, "id");
-                            if (list.size() != 0 && list.get(0).getPassword().equals(password)) {
-                                Cookie cookie = Cookie.getInstance();
-                                cookie.setAccountType(Cookie.AccountType.TEACHER);
-                                cookie.setUsername(list.get(0).getName());
-                                // 获取所有比赛信息
-                                List<SportInformation> sportInformationList = DB.select(new SportInformation(), "");
-                                // 获取当前登录学生的报名信息
-                                List<SportInformation> studentSportInfoList = sportInformationList.stream()
-                                        .filter(info -> info.getId().equals(userId))
-                                        .collect(Collectors.toList());
-                                // 检查今天和明天是否有比赛，如果有，则提醒
-                                for (SportInformation studentSportInfo : studentSportInfoList) {
-                                    String formattedDateString = java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-                                    // 检查比赛日期是否为今天或明天
-                                    if (studentSportInfo.getStartTime().equals(formattedDateString) || studentSportInfo.getStartTime().equals(java.time.LocalDate.now().plusDays(1).format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")))) {
-                                        JOptionPane.showMessageDialog(jFrame, "您有比赛明天，请注意准备！", "比赛提醒", JOptionPane.INFORMATION_MESSAGE);
-                                        break;  // 只提醒一次即可
-                                    }
-                                }
-
-                                new com.window.teacher.Menue().show();
-                                jFrame.setVisible(false);
-                            }else{
-                                JOptionPane.showMessageDialog(jFrame, "用户名或密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
                     }
-                    else if ("裁判".equals(selectedRole) ) {
+                    else if ("管理员".equals(selectedRole) ) {
                         Admin admin = new Admin();
-                        admin.setUsername(userId);
+                        admin.setUsername(username);
                         List<Admin> list = DB.select(admin, "username");
                         if (list.size()!=0 && list.get(0).getPassword().equals(password)){
                             Cookie cookie = Cookie.getInstance();
                             cookie.setAccountType(Cookie.AccountType.ADMINISTRATOR);
-                            cookie.setUsername(userId);
+                            cookie.setUsername(username);
                             new Menue().show();
                             jFrame.setVisible(false);
 

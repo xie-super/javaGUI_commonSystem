@@ -1,12 +1,16 @@
 package com.window;
 
 
+import com.achieve.DB;
+import com.achieve.entity.User;
 import com.achieve.service.StudentInformationsql;
+import com.util.data.Cookie;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 public class ChangePassword {
     private JFrame jFrame;
@@ -64,27 +68,23 @@ public class ChangePassword {
         update.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Login.id != -1) {
-                    if (changePassword.getText().equals(repeatChangePassword.getText())) {
-                        StudentInformationsql.updatePassword(Login.id, repeatChangePassword.getText());
-                        JOptionPane.showMessageDialog(null, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-
-                        jFrame.setVisible(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "两次密码不一致", "失败", JOptionPane.INFORMATION_MESSAGE);
-
-                    }
-                } else {
-                    if (changePassword.getText().equals(repeatChangePassword.getText())) {
-                        //TeacherInformationsql.updatePassword(Login.teacher_id, repeatChangePassword.getText());
-                        JOptionPane.showMessageDialog(null, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-
-                        jFrame.setVisible(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "两次密码不一致", "失败", JOptionPane.INFORMATION_MESSAGE);
-
-                    }
+            if (changePassword.getText().equals(repeatChangePassword.getText())) {
+                Cookie cookie = Cookie.getInstance();
+                User user = new User(cookie.getUsername());
+                user.setUserId(cookie.getUserId());
+                user.setPassword(changePassword.getText());
+                try {
+                    DB.update(user, "username");
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
+                JOptionPane.showMessageDialog(null, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+
+                jFrame.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "两次密码不一致", "失败", JOptionPane.INFORMATION_MESSAGE);
+
+            }
             }
         });
         return jPanel;

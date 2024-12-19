@@ -10,7 +10,6 @@ import com.window.ChangePassword;
 import com.window.Login;
 import com.window.admin.ClazzInfPanel;
 import com.window.admin.NoticeMsgPanel;
-import com.window.admin.Top8InfPanel;
 import com.window.common.GenericInfoPanel;
 import com.window.common.GenericTablePanel;
 import lombok.SneakyThrows;
@@ -20,10 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Menue {
     private JFrame jFrame;

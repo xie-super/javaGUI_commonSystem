@@ -1,12 +1,14 @@
 package com.util.data;
 
 
+import java.util.Map;
+
 public class CommonData {
 
-    public static final String ProjectName = "大学生运动会管理系统";
+    public static final String ProjectName = "汽车租赁系统";
     public static final  String Version = "1.0";
     public static final String[] roles = {
-        "学生","教师","裁判"
+        "管理员","用户"
     };
 
 
