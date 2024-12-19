@@ -5,15 +5,11 @@ package com.window.admin;
  * Time:2024/1/14
  * Name:IntelliJ IDEA
  */
-import com.achieve.DB;
-import com.achieve.entity.Sport;
 import com.achieve.service.Projectsql;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 

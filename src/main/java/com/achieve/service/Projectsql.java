@@ -1,7 +1,6 @@
 package com.achieve.service;
 
 import com.achieve.DB;
-import com.achieve.entity.SportInformationVO;
 
 import java.sql.*;
 import java.util.ArrayList;

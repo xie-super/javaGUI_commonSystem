@@ -1,6 +1,5 @@
 package com.window.common;
 
-import com.achieve.entity.Student;
 import com.util.data.AttributeMapper;
 
 import javax.swing.*;

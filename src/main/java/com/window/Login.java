@@ -2,7 +2,6 @@ package com.window;
 
 import com.achieve.DB;
 import com.achieve.entity.*;
-import com.achieve.service.StudentInformationsql;
 import com.util.data.CommonData;
 import com.util.data.Cookie;
 import com.window.admin.Menue;
@@ -17,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Login {
 
@@ -182,7 +180,7 @@ public class Login {
                                 cookie.setAccountType(Cookie.AccountType.STUDENT);
                                 cookie.setUsername(list.get(0).getUsername());
                                 cookie.setUserId(list.get(0).getUserId());
-                                new com.window.student.Menue().show();
+                                new com.window.role1.Menue().show();
                                 jFrame.setVisible(false);
                             }else{
                                 JOptionPane.showMessageDialog(jFrame, "用户名或密码错误！", "错误", JOptionPane.ERROR_MESSAGE);

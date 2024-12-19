@@ -1,6 +1,5 @@
 package com.window;
 import com.achieve.DB;
-import com.achieve.entity.Student;
 
 import com.util.data.CommonData;
 
