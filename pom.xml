@@ -5,8 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>ScientificResearchSystem</artifactId>
+    <artifactId>scoffolding-gui</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>dal</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
