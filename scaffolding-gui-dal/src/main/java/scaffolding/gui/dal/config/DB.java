@@ -10,6 +10,7 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import scaffolding.gui.start.util.ConfigManager;
+import scaffolding.gui.start.util.TransferStringUtils;
 
 @Slf4j
 public class DB {
@@ -110,14 +111,9 @@ public class DB {
 
         try {
             connection = getConn();
-
-            // 获取实体类的所有字段
             Field[] fields = entity.getClass().getDeclaredFields();
+            String tableName = TransferStringUtils.toCamelCase(entity.getClass().getSimpleName());
 
-            // 获取实体类的类名并转换为小写
-            String tableName = entity.getClass().getSimpleName().toLowerCase();
-
-            // 构建SQL语句
             StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
 
             for (Field field : fields) {
@@ -172,7 +168,8 @@ public class DB {
 
     // 简化的 select 方法，传入类型实例，以及 where后的限制字段  select * from (entity的类名) where fieldName = (entity实例的fieldName值)返回传入类型的链表
     //若field == ""则返回表中所有记录
-    public static <T> List<T> select(T entity, String fieldName) throws SQLException {
+    @SuppressWarnings("raw")
+    public static <T> List<T> select(T entity, String... fieldNames) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -181,25 +178,35 @@ public class DB {
             connection = getConn();
             // 获取实体类的类名并转换为小写
             String tableName = entity.getClass().getSimpleName().toLowerCase();
-            // 构建SQL语句
-            String sql = "SELECT * FROM " + tableName;
 
-            if (!fieldName.isEmpty()) {
-                // If fieldName is not empty, add WHERE clause
-                sql += " WHERE " + fieldName + "=?";
+            // 构建基本的SQL语句
+            StringBuilder sql = new StringBuilder("SELECT * FROM " + tableName);
+
+            // 检查是否有WHERE条件
+            if (fieldNames.length > 0 && !fieldNames[0].isEmpty()) {
+                sql.append(" WHERE ");
+                // 添加每个字段名和对应的值
+                for (int i = 0; i < fieldNames.length; i++) {
+                    if (i > 0) {
+                        sql.append(" AND ");
+                    }
+                    sql.append(fieldNames[i]).append("=?");
+                }
             }
 
             // 创建PreparedStatement并设置参数
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql.toString());
 
-            // If fieldName is not empty, set the parameter
-            if (!fieldName.isEmpty()) {
-                // 通过反射获取实体对象的字段值
-                Field field = entity.getClass().getDeclaredField(fieldName);
-                field.setAccessible(true); // 设置字段可访问
-                Object value = field.get(entity);
+            // 如果有WHERE条件，通过反射设置参数值
+            for (int i = 0; i < fieldNames.length; i++) {
+                if (!fieldNames[i].isEmpty()) {
+                    // 通过反射获取实体对象的字段值
+                    Field field = entity.getClass().getDeclaredField(fieldNames[i]);
+                    field.setAccessible(true); // 设置字段可访问
+                    Object value = field.get(entity);
 
-                preparedStatement.setObject(1, value);
+                    preparedStatement.setObject(i + 1, value);
+                }
             }
 
             // 执行查询操作
@@ -228,9 +235,12 @@ public class DB {
             System.err.println("Exception: " + e.getMessage());
             return new ArrayList<>(); // 返回空列表或其他标志
         } finally {
-            connection.close();
+            if (connection != null) {
+                connection.close();
+            }
         }
     }
+
 
     // 通用的 delete 方法
     public static <T> boolean delete(T entity, String fieldName) throws SQLException {

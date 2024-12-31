@@ -1,3 +1,4 @@
+/*
 package com.ui.common;
 import com.util.data.AttributeMapper;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 //通用列表，使用方式
 
+*/
 /*
 String[] heard = {"id", "name", "sex", "clazz", "password"};
 
@@ -17,13 +19,14 @@ String[] heard = {"id", "name", "sex", "clazz", "password"};
         Student student = new Student(); // Create an instance of Student (you might need to set some values)
         student.setSex("男");
         tablePanel.show(heard, student, "sex");
-* */
+* *//*
+
 public class GenericTablePanel<T> {
     private JFrame jFrame;
     private JPanel jPanel;
     private JTable table;
     private JScrollPane jScrollPane;
-    private DB db = new DB();
+
     public void show(String[] heard, T entity, String fieldName) throws SQLException {
 
 
@@ -34,7 +37,7 @@ public class GenericTablePanel<T> {
     }
 
     public JPanel panel(String[] heard, T entity, String fieldName) throws SQLException {
-        List<T> dataList = db.select(entity, fieldName);
+        //List<T> dataList = db.select(entity, fieldName);
         Object[][] data = convertDataArray(dataList, heard);
         jPanel = new JPanel() {
             @Override
@@ -109,3 +112,4 @@ public class GenericTablePanel<T> {
         tablePanel.show(heard, student, "sex");
     }
 }
+*/

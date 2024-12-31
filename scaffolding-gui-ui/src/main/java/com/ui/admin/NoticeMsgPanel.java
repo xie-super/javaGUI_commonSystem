@@ -1,3 +1,4 @@
+/*
 package com.ui.admin;
 
 import scaffolding.gui.ui.entity.Notice;
@@ -85,4 +86,4 @@ public class NoticeMsgPanel {
             }
         }
     }
-}
+}*/

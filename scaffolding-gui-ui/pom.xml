@@ -9,4 +9,16 @@
     <artifactId>scaffolding-gui-ui</artifactId>
     <name>Archetype - scaffolding-gui-ui</name>
     <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>scaffolding.gui</groupId>
+            <artifactId>scaffolding-gui-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>

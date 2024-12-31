@@ -1,3 +1,4 @@
+/*
 package com.ui.common;
 
 import com.util.data.AttributeMapper;
@@ -121,3 +122,4 @@ public class GenericInfoPanel<T> {
         infoPanel.show(student);
     }
 }
+*/

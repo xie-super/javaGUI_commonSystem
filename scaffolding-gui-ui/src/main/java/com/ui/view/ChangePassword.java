@@ -1,7 +1,7 @@
+/*
 package com.ui.view;
 
 
-import scaffolding.gui.ui.entity.User;
 import com.util.data.Cookie;
 
 
@@ -88,3 +88,4 @@ public class ChangePassword {
         return jPanel;
     }
 }
+*/

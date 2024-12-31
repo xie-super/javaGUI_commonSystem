@@ -50,6 +50,7 @@ public class UserConfig {
 
         public static class Function {
             private String tableName;
+            private String functionName;
             private List<String> role;
             private List<String> roleName;
 
@@ -63,6 +64,12 @@ public class UserConfig {
 
             public List<String> getRole() {
                 return role;
+            }
+            public void setFunctionName(String functionName) {
+                this.functionName = functionName;
+            }
+            public String getFunctionName() {
+                return functionName;
             }
 
             public void setRole(List<String> role) {

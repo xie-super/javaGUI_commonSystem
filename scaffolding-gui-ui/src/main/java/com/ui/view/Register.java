@@ -1,3 +1,4 @@
+/*
 package com.ui.view;
 
 import com.util.data.CommonData;
@@ -18,7 +19,6 @@ public class Register {
     private JTextField realNamelTxt;
     private JCheckBox agreeCheckbox;
     private JComboBox<String> roleComboBox;
-    private DB db = new DB();
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Register register = new Register();
@@ -153,3 +153,4 @@ public class Register {
         }
     }
 }
+*/

@@ -1,7 +1,7 @@
+/*
 package com.ui.common;
 
 import com.util.data.AttributeMapper;
-import lombok.SneakyThrows;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -232,7 +232,8 @@ public class GenericModifyPanel<T> {
                         setEntityProperty(entityToUpdate, heard[i], value);
                     }
 
-                   /* // Check if the first column (heard[0]) is modified
+                   */
+/* // Check if the first column (heard[0]) is modified
                     Object originalValue = dataList.get(selectedRow).getClass().getDeclaredField(heard[0]).get(dataList.get(selectedRow));
                     Object updatedValue = table.getValueAt(selectedRow, 0);
 
@@ -244,7 +245,8 @@ public class GenericModifyPanel<T> {
                     } else {
                         // Call the update method with the updated entity and the property to update
                         DB.update(entityToUpdate, heard[0]); // Replace 'update' with your actual update method
-                    }*/
+                    }*//*
+
                     DB.update(entityToUpdate, heard[0]);
                 }
             }
@@ -328,3 +330,4 @@ public class GenericModifyPanel<T> {
         });
     }
 }
+*/

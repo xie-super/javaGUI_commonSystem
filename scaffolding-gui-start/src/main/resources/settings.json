@@ -1,12 +1,13 @@
 {
   "users": [
     {
-      "tableName": "User",
+      "tableName": "Student",
       "roleName": "学生",
       "keyOfUserName": "studentId",
       "function": [
         {
-          "tableName": "MaintenanceRecord",
+          "tableName": "maintenanceRequest",
+          "functionName": "宿舍维修",
           "role": [
             "create",
             "search",
@@ -21,7 +22,8 @@
           ]
         },
         {
-          "tableName": "ProfitAnalysis",
+          "tableName": "checkInRecord",
+          "functionName": "入住信息",
           "role": [
             "create",
             "search",

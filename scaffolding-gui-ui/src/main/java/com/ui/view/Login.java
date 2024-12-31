@@ -1,11 +1,8 @@
 package com.ui.view;
 
 import com.util.data.CommonData;
-import com.util.data.Cookie;
-import com.ui.admin.Menue;
-import lombok.SneakyThrows;
-import scaffolding.gui.ui.entity.Admin;
-import scaffolding.gui.ui.entity.User;
+import scaffolding.gui.service.impl.UserImpl;
+import scaffolding.gui.start.config.UserConfig.User.Function;
 
 
 import javax.swing.*;
@@ -14,8 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.sql.SQLException;
-import java.util.List;
 
 public class Login {
 
@@ -37,7 +32,7 @@ public class Login {
     private JComboBox<String> roleComboBox;
     private String selectedRole = CommonData.roles[0];
 
-    private DB db = new DB();
+
     public void show() {
         jFrame = new JFrame(CommonData.ProjectName);
         jFrame.setBounds(700, 200, 380, 350);
@@ -76,7 +71,7 @@ public class Login {
 
         ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
 
-// 创建带有图像的JLabel
+        // 创建带有图像的JLabel
         JLabel background = new JLabel(scaledImageIcon);
         background.setBounds(0, 0, 400, 300);
         jPanel.add(background);
@@ -105,7 +100,7 @@ public class Login {
         captchaField.setBounds(120, 150, 100, 30);
         jPanel.add(captchaField);
 
-        captchaCode = generateCaptcha(); // 生成验证码
+        captchaCode = generateCaptcha();
         JLabel captchaImageLabel = new JLabel(new ImageIcon(generateCaptchaImage(captchaCode)));
         captchaImageLabel.setBounds(230, 150, 100, 30);
         jPanel.add(captchaImageLabel);
@@ -130,17 +125,10 @@ public class Login {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Register reg = new Register();
-                reg.show();
+
             }
         });
         jPanel.add(registerButton);
-
-
-
-        // 设置按钮和其他组件的样式...
-
-        // 重新生成验证码按钮的点击事件
         refreshCaptchaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -168,26 +156,17 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "验证码错误", "错误", JOptionPane.ERROR_MESSAGE);
                 } else {
                     System.out.println(selectedRole);
-
-                    // 根据选择的角色执行不同的登录逻辑
-                    if ("用户".equals(selectedRole)) {
-                        User user = new User();
-                        user.setUsername(username);
-                        try {
-                            List<User> list = DB.select(user, "username");
-                            if (list.size() != 0 && list.get(0).getPassword().equals(password)) {
-                                Cookie cookie = Cookie.getInstance();
-                                cookie.setAccountType(Cookie.AccountType.STUDENT);
-                                cookie.setUsername(list.get(0).getUsername());
-                                cookie.setUserId(list.get(0).getUserId());
-                                new com.ui.view.Menue().show();
-                                jFrame.setVisible(false);
-                            }else{
-                                JOptionPane.showMessageDialog(jFrame, "用户名或密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
+                    UserImpl userImpl = new UserImpl();
+                    boolean success = false;
+                    try {
+                        success = userImpl.login(selectedRole, username, password);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    if(success) {
+                        List<Function> functionList =
+                    }else {
+                        JOptionPane.showMessageDialog(jFrame, "用户名或密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
