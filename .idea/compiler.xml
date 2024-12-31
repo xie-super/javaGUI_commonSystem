@@ -7,9 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="scaffolding-gui-dal" />
         <module name="ScientificResearchSystem" />
-        <module name="dal" />
+        <module name="scaffolding-gui-start" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dal" target="1.8" />
+      <module name="start" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

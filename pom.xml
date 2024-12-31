@@ -4,12 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
-    <artifactId>scoffolding-gui</artifactId>
+    <groupId>scaffolding.gui</groupId>
+    <artifactId>scaffolding-gui</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>dal</module>
+        <module>scaffolding-gui-dal</module>
+        <module>scaffolding-gui-start</module>
     </modules>
 
     <properties>
@@ -18,7 +19,16 @@
     </properties>
 
     <dependencies>
-        <!-- Other dependencies -->
+        <dependency>
+            <groupId>scaffolding.gui</groupId>
+            <artifactId>scaffolding-gui-start</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>scaffolding.gui</groupId>
+            <artifactId>scaffolding-gui-dal</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- SQL Server JDBC Driver -->
         <dependency>
@@ -72,6 +82,17 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.76</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.9.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.7</version>
         </dependency>
 
 
