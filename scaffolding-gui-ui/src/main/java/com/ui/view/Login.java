@@ -1,6 +1,7 @@
 package com.ui.view;
 
 import com.util.data.CommonData;
+import scaffolding.gui.service.impl.MenueImpl;
 import scaffolding.gui.service.impl.UserImpl;
 import scaffolding.gui.start.config.UserConfig.User.Function;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Login {
 
@@ -161,10 +163,13 @@ public class Login {
                     try {
                         success = userImpl.login(selectedRole, username, password);
                     } catch (Exception ex) {
-                        throw new RuntimeException(ex);
+                        JOptionPane.showMessageDialog(jFrame, ex.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
                     }
                     if(success) {
-                        List<Function> functionList =
+                        MenueImpl menueImpl = new MenueImpl();
+                        List<Function> functionList = menueImpl.getUserFunctions();
+                        new Menue().show(functionList);
+                        jFrame.setVisible(false);
                     }else {
                         JOptionPane.showMessageDialog(jFrame, "用户名或密码错误！", "错误", JOptionPane.ERROR_MESSAGE);
                     }

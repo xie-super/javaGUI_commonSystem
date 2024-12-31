@@ -47,8 +47,8 @@ public class Menue {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // 这里的逻辑留空，不需要添加具体内容
-                    // 可以在实际使用时动态实现逻辑
+                    String functionName = button.getText();
+
                 }
             });
 

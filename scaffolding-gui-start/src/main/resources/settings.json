@@ -6,6 +6,26 @@
       "keyOfUserName": "studentId",
       "function": [
         {
+          "tableName": "student",
+          "functionName": "个人信息",
+          "role": [
+
+          ],
+          "roleName": [
+
+          ]
+        },
+        {
+          "tableName": "checkInRecord",
+          "functionName": "宿舍检查记录",
+          "role": [
+
+          ],
+          "roleName": [
+
+          ]
+        },
+        {
           "tableName": "maintenanceRequest",
           "functionName": "宿舍维修",
           "role": [
@@ -36,7 +56,8 @@
             "更新",
             "删除"
           ]
-        }
+        },
+
       ]
 
     },

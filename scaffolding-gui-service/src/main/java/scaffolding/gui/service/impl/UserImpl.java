@@ -56,7 +56,6 @@ public class UserImpl {
         }
         cookieUtils.destroy();
         return false;
-
     }
 
     public static void main(String[] args) throws Exception {

@@ -4,9 +4,9 @@ import lombok.Data;
 import scaffolding.gui.start.config.UserConfig.User;
 
 /**
- * Author:lb
  * Time:2024/1/11
  * Name:IntelliJ IDEA
+ * @author superxie
  */
 @Data
 public class CookieUtils {
