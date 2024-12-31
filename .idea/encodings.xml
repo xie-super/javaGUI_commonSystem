@@ -3,7 +3,13 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/scaffolding-gui-dal/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scaffolding-gui-dal/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-gen/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-gen/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scaffolding-gui-start/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/scaffolding-gui-start/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/scaffolding-gui-ui/src/main/resources" charset="UTF-8" />
   </component>
 </project>

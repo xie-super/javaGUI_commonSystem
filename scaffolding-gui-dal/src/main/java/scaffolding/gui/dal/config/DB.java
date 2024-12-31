@@ -9,27 +9,26 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
-import scaffolding.gui.start
+import scaffolding.gui.start.util.ConfigManager;
 
 @Slf4j
 public class DB {
 
-    private static String tableName ;
+    private static String databaseName ;
     private static String username ;
     private static String password ;
-    private static ConfigMapper Config ;
+    private static ConfigManager configManager;
     static {
 
-        tableName = "car";
-        username = "car_rental_system";
-        password = "zSJKRmBNFDx2dnXE";
+        databaseName = "dormitories_system";
+        username = "dormitories_system";
+        password = "dAxrwXchtSM7YYNB";
     }
-
     public static Connection getConn() {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://8.141.119.45:3306/car_rental_system?serverTimezone=UTC";
-        String username = "car_rental_system";
-        String password = "zSJKRmBNFDx2dnXE";
+        String url = String.format("jdbc:mysql://8.141.119.45:3306/%s?serverTimezone=UTC", databaseName);
+
+
         Connection conn = null;
         try {
             Class.forName(driver); //classLoader,加载对应驱动
@@ -43,71 +42,6 @@ public class DB {
     }
 
 
-    public static List<String> getAllTableNames() throws Exception {
-        Connection conn = getConn();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SHOW TABLES");
-
-        List<String> tableNames = new ArrayList<>();
-        while (rs.next()) {
-            tableNames.add(rs.getString(1));
-        }
-        log.info("table info: {}", tableNames);
-        rs.close();
-        stmt.close();
-        conn.close();
-        String tableName = tableNames.get(0);
-        getColumnInfo(tableName);
-
-        return tableNames;
-    }
-
-    public static void getDataForTableAndFormDomain() throws Exception {
-        List<String> tableNames = getAllTableNames();
-        Connection conn = getConn();
-        for (String tableName : tableNames) {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM `" + tableName + "`");
-            ResultSet rs = pstmt.executeQuery();
-
-            List<Map<String, Object>> results = new ArrayList<>();
-            while (rs.next()) {
-                Map<String, Object> row = new HashMap<>();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    row.put(rs.getMetaData().getColumnName(i), rs.getObject(i));
-                }
-                results.add(row);
-            }
-            rs.close();
-            pstmt.close();
-        }
-
-        conn.close();
-    }
-
-    public static List<Map<String, Object>> getColumnInfo(String tableName) throws Exception {
-        Connection conn = getConn();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(
-                "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT " +
-                        "FROM INFORMATION_SCHEMA.COLUMNS " +
-                        "WHERE TABLE_SCHEMA = 'gui' AND TABLE_NAME = '" + tableName + "'"
-        );
-
-        List<Map<String, Object>> columnInfos = new ArrayList<>();
-        while (rs.next()) {
-            Map<String, Object> columnInfo = new HashMap<>();
-            columnInfo.put("COLUMN_NAME", rs.getString("COLUMN_NAME"));
-            columnInfo.put("DATA_TYPE", rs.getString("DATA_TYPE"));
-            columnInfo.put("COLUMN_COMMENT", rs.getString("COLUMN_COMMENT"));
-            columnInfos.add(columnInfo);
-        }
-
-        rs.close();
-        stmt.close();
-        conn.close();
-
-        return columnInfos;
-    }
 
 
     //实现所有类型的插入操作
@@ -341,7 +275,7 @@ public class DB {
         }
     }
     public static void main(String[] args) throws Exception {
-        System.out.println(tableName);
+
         //update(student,"id");
     }
 }
