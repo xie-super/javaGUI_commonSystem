@@ -1,5 +1,7 @@
 package com.ui.view;
 
+import scaffolding.gui.service.impl.FunctionImpl;
+import scaffolding.gui.service.vo.FunctionDataVO;
 import scaffolding.gui.start.JsonParser;
 import scaffolding.gui.start.config.UserConfig;
 import scaffolding.gui.start.config.UserConfig.User.Function;
@@ -39,24 +41,29 @@ public class Menue {
         jPanel.add(splitPane, BorderLayout.CENTER);
 
         for (Function function : functions) {
-            JButton button = new JButton(function.getFunctionName());
-            button.setBackground(new Color(255, 255, 255));
-            button.setForeground(Color.RED);
+            JButton button = getJButton(function);
 
-            // 为按钮添加事件监听器
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String functionName = button.getText();
-
-                }
-            });
-
-            // 将按钮添加到左侧面板
             leftPanel.add(button);
         }
 
         return jPanel;
+    }
+
+    private static JButton getJButton(Function function) {
+        JButton button = new JButton(function.getFunctionName());
+        button.setBackground(new Color(255, 255, 255));
+        button.setForeground(Color.RED);
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String functionName = button.getText();
+                FunctionImpl functionImpl = new FunctionImpl();
+                FunctionDataVO functionDataVO = functionImpl.getFunctionData(functionName);
+                System.out.println(1);
+            }
+        });
+        return button;
     }
 
 
