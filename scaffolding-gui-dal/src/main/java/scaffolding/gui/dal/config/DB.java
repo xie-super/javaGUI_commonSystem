@@ -177,8 +177,7 @@ public class DB {
         try {
             connection = getConn();
             // 获取实体类的类名并转换为小写
-            String tableName = entity.getClass().getSimpleName().toLowerCase();
-
+            String tableName = TransferStringUtils.toCamelCase(entity.getClass().getSimpleName());
             // 构建基本的SQL语句
             StringBuilder sql = new StringBuilder("SELECT * FROM " + tableName);
 

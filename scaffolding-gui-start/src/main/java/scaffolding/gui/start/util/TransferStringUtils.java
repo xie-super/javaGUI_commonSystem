@@ -7,29 +7,33 @@ public class TransferStringUtils {
         if (str == null || str.isEmpty()) {
             return str;
         }
-
         StringBuilder result = new StringBuilder();
         boolean isNextUpper = false;
-
+        boolean isFirstChar = true;
         for (char ch : str.toCharArray()) {
             if (ch == '_' || ch == '-') {
-                isNextUpper = true; // 下一个字符转换为大写
+                isNextUpper = true;
             } else {
                 if (isNextUpper) {
                     result.append(Character.toUpperCase(ch));
                     isNextUpper = false;
                 } else {
-                    result.append(Character.toLowerCase(ch));
+                    if (isFirstChar) {
+                        result.append(Character.toLowerCase(ch));
+                        isFirstChar = false;
+                    } else {
+                        result.append(ch);
+                    }
                 }
             }
         }
         return result.toString();
     }
 
+
     // 转换为大驼峰（PascalCase）
     public static String toPascalCase(String str) {
-        String camelCase = toCamelCase(str);
-        return camelCase.isEmpty() ? camelCase : Character.toUpperCase(camelCase.charAt(0)) + camelCase.substring(1);
+        return str.isEmpty() ? str : Character.toUpperCase(str.charAt(0)) + str.substring(1);
     }
 
     public static void main(String[] args) {

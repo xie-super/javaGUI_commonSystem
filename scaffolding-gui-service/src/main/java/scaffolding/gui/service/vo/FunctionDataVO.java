@@ -11,6 +11,7 @@ import java.util.Map;
  */
 @Data
 public class FunctionDataVO {
+    private String tableName;
     private String functionName;
     private Map<String, String> functionMapping;
     private List<String> functionHeaderList;

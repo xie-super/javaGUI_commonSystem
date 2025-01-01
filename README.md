@@ -43,7 +43,7 @@ lastmod: 2024-01-24T12:14:48Z
 
     ```java
      String[] heard = {"id", "name", "sex", "clazz", "password"};
-     GenericModifyPanel<Student> modifyPanel = new GenericModifyPanel<>();
+     Gen<Student> modifyPanel = new Gen<>();
      Student student = new Student(); // Create an instance of Student (you might need to set some values)
 
      student.setSex("男");

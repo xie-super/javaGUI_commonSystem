@@ -1,6 +1,6 @@
-/*
 package com.ui.common;
 import com.util.data.AttributeMapper;
+import scaffolding.gui.service.vo.FunctionDataVO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -9,36 +9,25 @@ import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.util.List;
 
-//通用列表，使用方式
+import static com.ui.common.GenericModifyPanel.convertTwoDimToObjectArray;
 
-*/
-/*
-String[] heard = {"id", "name", "sex", "clazz", "password"};
-
-        GenericTablePanel<Student> tablePanel = new GenericTablePanel<>();
-        Student student = new Student(); // Create an instance of Student (you might need to set some values)
-        student.setSex("男");
-        tablePanel.show(heard, student, "sex");
-* *//*
-
-public class GenericTablePanel<T> {
+public class GenericTablePanel {
     private JFrame jFrame;
     private JPanel jPanel;
     private JTable table;
     private JScrollPane jScrollPane;
-
-    public void show(String[] heard, T entity, String fieldName) throws SQLException {
-
-
+    private List<List<Object>> dataList;
+    public void show(FunctionDataVO functionDataVO) {
         jFrame = new JFrame();
         jFrame.setBounds(500, 100, 700, 500);
-        jFrame.add(panel(heard, entity,fieldName));
+        jFrame.add(panel(functionDataVO));
         jFrame.setVisible(true);
     }
 
-    public JPanel panel(String[] heard, T entity, String fieldName) throws SQLException {
-        //List<T> dataList = db.select(entity, fieldName);
-        Object[][] data = convertDataArray(dataList, heard);
+    public JPanel panel(FunctionDataVO functionDataVO) {
+        this.dataList =  functionDataVO.getDataList();
+        Object[][] data = convertTwoDimToObjectArray(dataList);
+        String[] chineseHeard = functionDataVO.getFunctionHeaderList().toArray(new String[0]);;
         jPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -51,10 +40,6 @@ public class GenericTablePanel<T> {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-
-        // Convert header to Chinese names
-        String[] chineseHeard = convertHeardToChinese(heard);
-
         table = new JTable(data, chineseHeard);
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
@@ -73,43 +58,6 @@ public class GenericTablePanel<T> {
         return jPanel;
     }
 
-    private String[] convertHeardToChinese(String[] heard) {
-        String[] chineseHeard = new String[heard.length];
-        for (int i = 0; i < heard.length; i++) {
-            chineseHeard[i] = AttributeMapper.mapAttributeToField(heard[i]);
-        }
-        return chineseHeard;
-    }
-
-
-
-
-    private Object[][] convertDataArray(List<T> dataList, String[] heard) {
-        Object[][] data = new Object[dataList.size()][heard.length];
-
-        for (int i = 0; i < dataList.size(); i++) {
-            T entity = dataList.get(i);
-
-            for (int j = 0; j < heard.length; j++) {
-                try {
-                    Field field = entity.getClass().getDeclaredField(heard[j]);
-                    field.setAccessible(true);
-                    data[i][j] = field.get(entity);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return data;
-    }
-
     public static void main(String[] args) throws SQLException {
-        String[] heard = {"id", "name", "sex", "clazz", "password"};
-        GenericTablePanel<Student> tablePanel = new GenericTablePanel<>();
-        Student student = new Student(); // Create an instance of Student (you might need to set some values)
-        student.setSex("男");
-        tablePanel.show(heard, student, "sex");
     }
 }
-*/
