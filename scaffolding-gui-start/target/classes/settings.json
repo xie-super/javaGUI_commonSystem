@@ -8,6 +8,7 @@
         {
           "tableName": "student",
           "functionName": "个人信息",
+          "panelName": "GenericTablePanel",
           "role": [
 
           ],
@@ -16,8 +17,9 @@
           ]
         },
         {
-          "tableName": "checkInRecord",
+          "tableName": "inspection",
           "functionName": "宿舍检查记录",
+          "panelName": "GenericTablePanel",
           "role": [
 
           ],
@@ -28,6 +30,7 @@
         {
           "tableName": "maintenanceRequest",
           "functionName": "宿舍维修",
+          "panelName": "GenericTablePanel",
           "role": [
             "create",
             "search",
@@ -44,45 +47,7 @@
         {
           "tableName": "checkInRecord",
           "functionName": "入住信息",
-          "role": [
-            "create",
-            "search",
-            "update",
-            "delete"
-          ],
-          "roleName": [
-            "新增",
-            "搜索",
-            "更新",
-            "删除"
-          ]
-        },
-
-      ]
-
-    },
-    {
-      "tableName": "Admin",
-      "roleName": "管理员",
-      "keyOfUserName": "",
-      "function": [
-        {
-          "tableName": "MaintenanceRecord",
-          "role": [
-            "create",
-            "search",
-            "update",
-            "delete"
-          ],
-          "roleName": [
-            "新增",
-            "搜索",
-            "更新",
-            "删除"
-          ]
-        },
-        {
-          "tableName": "ProfitAnalysis",
+          "panelName": "GenericTablePanel",
           "role": [
             "create",
             "search",
@@ -96,6 +61,101 @@
             "删除"
           ]
         }
+
+      ]
+
+    },
+    {
+      "tableName": "Administrator",
+      "roleName": "管理员",
+      "keyOfUserName": "adminId",
+      "function": [
+        {
+          "tableName": "Dormitory",
+          "functionName": "宿舍信息管理",
+          "panelName": "GenericModifyPanel",
+          "role": [
+            "create",
+            "search",
+            "update",
+            "delete"
+          ],
+          "roleName": [
+            "新增",
+            "搜索",
+            "更新",
+            "删除"
+          ]
+        },
+        {
+          "tableName": "Student",
+          "functionName": "学生信息管理",
+          "panelName": "GenericModifyPanel",
+          "role": [
+            "create",
+            "search",
+            "update",
+            "delete"
+          ],
+          "roleName": [
+            "新增",
+            "搜索",
+            "更新",
+            "删除"
+          ]
+        },
+        {
+          "tableName": "checkInRecord",
+          "functionName": "入住信息管理",
+          "panelName": "GenericModifyPanel",
+          "role": [
+            "create",
+            "search",
+            "update",
+            "delete"
+          ],
+          "roleName": [
+            "新增",
+            "搜索",
+            "更新",
+            "删除"
+          ]
+        },
+        {
+          "tableName": "inspection",
+          "functionName": "宿舍检查记录管理",
+          "panelName": "GenericModifyPanel",
+          "role": [
+            "create",
+            "search",
+            "update",
+            "delete"
+          ],
+          "roleName": [
+            "新增",
+            "搜索",
+            "更新",
+            "删除"
+          ]
+        },
+        {
+          "tableName": "maintenanceRequest",
+          "functionName": "维修记录管理",
+          "panelName": "GenericModifyPanel",
+          "role": [
+            "create",
+            "search",
+            "update",
+            "delete"
+          ],
+          "roleName": [
+            "新增",
+            "搜索",
+            "更新",
+            "删除"
+          ]
+        }
+
       ]
     }
   ]

@@ -37,6 +37,7 @@ public class FunctionImpl {
             }
             functionDataVO.setTableName(function.getTableName());
             functionDataVO.setFunctionName(function.getFunctionName());
+            functionDataVO.setPanelName(function.getPanelName());
             Map<String, String> functionMapping = new HashMap<>();
             for(int i = 0; i < function.getRole().size(); i++) {
                 String role = function.getRole().get(i);

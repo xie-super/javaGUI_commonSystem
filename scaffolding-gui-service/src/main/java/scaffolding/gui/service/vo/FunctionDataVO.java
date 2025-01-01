@@ -13,6 +13,7 @@ import java.util.Map;
 public class FunctionDataVO {
     private String tableName;
     private String functionName;
+    private String panelName;
     private Map<String, String> functionMapping;
     private List<String> functionHeaderList;
     private List<List<Object>> dataList;

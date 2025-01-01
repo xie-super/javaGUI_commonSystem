@@ -51,6 +51,7 @@ public class UserConfig {
         public static class Function {
             private String tableName;
             private String functionName;
+            private String panelName;
             private List<String> role;
             private List<String> roleName;
 
@@ -70,6 +71,12 @@ public class UserConfig {
             }
             public String getFunctionName() {
                 return functionName;
+            }
+            public void setPanelName(String panelName) {
+                this.panelName = panelName;
+            }
+            public String getPanelName() {
+                return panelName;
             }
 
             public void setRole(List<String> role) {

@@ -6,11 +6,13 @@ import scaffolding.gui.service.vo.FunctionDataVO;
 import scaffolding.gui.start.JsonParser;
 import scaffolding.gui.start.config.UserConfig;
 import scaffolding.gui.start.config.UserConfig.User.Function;
+import scaffolding.gui.start.util.TransferStringUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class Menue {
@@ -52,7 +54,16 @@ public class Menue {
                     String functionName = button.getText();
                     FunctionImpl functionImpl = new FunctionImpl();
                     FunctionDataVO functionDataVO = functionImpl.getFunctionData(functionName);
-                    new GenericModifyPanel().show(functionDataVO);
+                    String className = String.format("com.ui.common.%s", functionDataVO.getPanelName());
+
+                    try {
+                        Class<?> panelClazz = Class.forName(className);
+                        Method showMethod = panelClazz.getMethod("show", FunctionDataVO.class);
+                        Object panelInstance = panelClazz.getDeclaredConstructor().newInstance();
+                        showMethod.invoke(panelInstance, functionDataVO);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
             
