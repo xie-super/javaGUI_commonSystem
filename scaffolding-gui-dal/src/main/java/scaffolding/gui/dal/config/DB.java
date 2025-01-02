@@ -5,10 +5,8 @@ import java.sql.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
+import scaffolding.gui.common.util.TransferStringUtils;
 import lombok.extern.slf4j.Slf4j;
-import scaffolding.gui.start.util.ConfigManager;
-import scaffolding.gui.start.util.TransferStringUtils;
 
 @Slf4j
 public class DB {
@@ -16,7 +14,6 @@ public class DB {
     private static String databaseName ;
     private static String username ;
     private static String password ;
-    private static ConfigManager configManager;
     static {
 
         databaseName = "dormitories_system";

@@ -6,22 +6,22 @@ import scaffolding.gui.dal.annotation.FieldDescription;
 @Data
 public class Dormitory {
 
-    @FieldDescription("宿舍 ID")
+    @FieldDescription(description = "宿舍 ID")
     private String dormId;
 
-    @FieldDescription("宿舍楼")
+    @FieldDescription(description = "宿舍楼")
     private String building;
 
-    @FieldDescription("房间号")
+    @FieldDescription(description = "房间号")
     private String roomNumber;
 
-    @FieldDescription("房间容量")
+    @FieldDescription(description = "房间容量")
     private int capacity;
 
-    @FieldDescription("当前入住人数")
+    @FieldDescription(description = "当前入住人数")
     private int currentOccupancy;
 
-    @FieldDescription("性别限制")
+    @FieldDescription(description = "性别限制")
     private String gender;
 
 }

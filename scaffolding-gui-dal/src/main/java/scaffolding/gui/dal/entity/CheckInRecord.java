@@ -7,19 +7,19 @@ import java.sql.Date;
 
 @Data
 public class CheckInRecord {
-    @FieldDescription("记录 ID")
+    @FieldDescription(description = "记录 ID")
     private int recordId;
 
-    @FieldDescription("学生 ID")
+    @FieldDescription(description = "学生 ID")
     private String studentId;
 
-    @FieldDescription("宿舍 ID")
+    @FieldDescription(description = "宿舍 ID")
     private String dormId;
 
-    @FieldDescription("")
+    @FieldDescription(description = "")
     private Date checkInDate;
 
-    @FieldDescription("退宿日期")
+    @FieldDescription(description = "退宿日期")
     private Date checkOutDate;
 
 

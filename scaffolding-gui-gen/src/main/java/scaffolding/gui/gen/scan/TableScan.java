@@ -26,9 +26,6 @@ public class TableScan {
         rs.close();
         stmt.close();
         conn.close();
-        String tableName = tableNames.get(0);
-        getColumnInfo(tableName);
-
         return tableNames;
     }
 
@@ -60,7 +57,7 @@ public class TableScan {
         ResultSet rs = stmt.executeQuery(
                 "SELECT COLUMN_NAME, DATA_TYPE, COLUMN_COMMENT " +
                         "FROM INFORMATION_SCHEMA.COLUMNS " +
-                        "WHERE TABLE_SCHEMA = 'dormitories_system' AND TABLE_NAME = '" + tableName + "'"
+                        "WHERE TABLE_SCHEMA = '"+tableName+"'"+" AND TABLE_NAME = '" + tableName + "'"
         );
 
         List<Map<String, Object>> columnInfos = new ArrayList<>();
@@ -80,6 +77,6 @@ public class TableScan {
     }
 
     public static void main(String[] args) throws Exception {
-        getAllTableNames();
+        getDataForTableAndFormDomain();
     }
 }
