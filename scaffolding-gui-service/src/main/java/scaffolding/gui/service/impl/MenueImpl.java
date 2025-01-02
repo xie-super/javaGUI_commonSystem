@@ -2,12 +2,12 @@ package scaffolding.gui.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import scaffolding.gui.service.utils.CookieUtils;
-import scaffolding.gui.start.config.UserConfig.User;
+import scaffolding.gui.start.init.UserConfig.User;
 
 import java.util.List;
 
 /**
- * @author superxie
+ * @author lb
  */
 @Slf4j
 public class MenueImpl {

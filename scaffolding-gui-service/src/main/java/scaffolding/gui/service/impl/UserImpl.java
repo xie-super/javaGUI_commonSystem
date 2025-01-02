@@ -6,7 +6,7 @@ import org.codehaus.plexus.util.StringUtils;
 import scaffolding.gui.dal.config.DB;
 import scaffolding.gui.service.utils.CookieUtils;
 import scaffolding.gui.start.JsonParser;
-import scaffolding.gui.start.config.UserConfig;
+import scaffolding.gui.start.init.UserConfig;
 import scaffolding.gui.start.util.TransferStringUtils;
 
 import java.lang.reflect.Field;

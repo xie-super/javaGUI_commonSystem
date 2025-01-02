@@ -1,12 +1,11 @@
 package scaffolding.gui.service.utils;
 
 import lombok.Data;
-import scaffolding.gui.start.config.UserConfig.User;
+import scaffolding.gui.start.init.UserConfig.User;
 
 /**
- * Time:2024/1/11
  * Name:IntelliJ IDEA
- * @author superxie
+ * @author lb
  */
 @Data
 public class CookieUtils {

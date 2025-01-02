@@ -5,7 +5,7 @@ import scaffolding.gui.dal.annotation.AnnotationUtils;
 import scaffolding.gui.dal.config.DB;
 import scaffolding.gui.service.utils.CookieUtils;
 import scaffolding.gui.service.vo.FunctionDataVO;
-import scaffolding.gui.start.config.UserConfig;
+import scaffolding.gui.start.init.UserConfig;
 import scaffolding.gui.start.util.TransferStringUtils;
 
 import java.lang.reflect.Field;
@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author superxie
+ * @author lb
  */
 public class FunctionImpl {
 

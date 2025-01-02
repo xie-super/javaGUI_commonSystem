@@ -1,9 +1,9 @@
 package com.ui.view;
 
-import com.util.data.CommonData;
+import scaffolding.gui.common.constants.CommonData;
 import scaffolding.gui.service.impl.MenueImpl;
 import scaffolding.gui.service.impl.UserImpl;
-import scaffolding.gui.start.config.UserConfig.User.Function;
+import scaffolding.gui.start.init.UserConfig.User.Function;
 
 
 import javax.swing.*;

@@ -1,12 +1,9 @@
 package com.ui.view;
 
-import com.ui.common.GenericModifyPanel;
+import scaffolding.gui.common.util.JsonParser;
 import scaffolding.gui.service.impl.FunctionImpl;
-import scaffolding.gui.service.vo.FunctionDataVO;
-import scaffolding.gui.start.JsonParser;
-import scaffolding.gui.start.config.UserConfig;
-import scaffolding.gui.start.config.UserConfig.User.Function;
-import scaffolding.gui.start.util.TransferStringUtils;
+import scaffolding.gui.start.init.UserConfig;
+import scaffolding.gui.start.init.UserConfig.User.Function;
 
 import javax.swing.*;
 import java.awt.*;

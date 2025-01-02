@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author superxie
+ * @author lb
  */
 public class AnnotationUtils {
 
@@ -15,7 +15,7 @@ public class AnnotationUtils {
         for (Field field : fields) {
             if (field.isAnnotationPresent(FieldDescription.class)) {
                 FieldDescription description = field.getAnnotation(FieldDescription.class);
-                headerList.add(description.value());
+                headerList.add(description.description());
             }
         }
         return headerList;

@@ -1,7 +1,7 @@
 /*
 package com.ui.view;
 
-import com.util.data.CommonData;
+import scaffolding.gui.common.constants.CommonData;
 
 import javax.swing.*;
 import java.awt.*;

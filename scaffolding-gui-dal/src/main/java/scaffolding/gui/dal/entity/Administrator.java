@@ -7,7 +7,7 @@ import scaffolding.gui.dal.annotation.FieldDescription;
 @Data
 public class Administrator {
 
-    @FieldDescription("管理员 ID")
+    @FieldDescription(name = "adminId", description = "管理员 ID")
     private String adminId;
 
     @FieldDescription("姓名")
@@ -22,5 +22,8 @@ public class Administrator {
     @FieldDescription("密码")
     private String password;
 
+    public static void main(String[] args) {
+
+    }
 }
 

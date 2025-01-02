@@ -14,6 +14,7 @@
         <module>scaffolding-gui-gen</module>
         <module>scaffolding-gui-ui</module>
         <module>scaffolding-gui-service</module>
+        <module>scaffolding-gui-common</module>
     </modules>
 
     <properties>

@@ -12,6 +12,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="scaffolding-gui-service" />
         <module name="scaffolding-gui-ui" />
+        <module name="scaffolding-gui-common" />
         <module name="scaffolding-gui-gen" />
         <module name="scaffolding-gui-dal" />
         <module name="scaffolding-gui-start" />
