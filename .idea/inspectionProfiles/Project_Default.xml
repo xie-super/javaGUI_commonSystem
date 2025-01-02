@@ -4,6 +4,9 @@
     <inspection_tool class="AllBranchesAreIdentical" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AllMatchWithoutEmptyCheck" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AnchorPrecedence" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AnonymousClassMethodCount" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_limit" value="1" />
+    </inspection_tool>
     <inspection_tool class="ApiServiceParameterTypeEndWithSpecificSuffix" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ApiServiceReturnTypeEndWithSpecificSuffix" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ApiServiceReturnTypeMustExtendsBase" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -97,6 +100,9 @@
     <inspection_tool class="InvalidRegex" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InvariantReturn" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IterableIterator" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ADDITIONAL_TAGS" value="date,description" />
+    </inspection_tool>
     <inspection_tool class="KeywordAsIdentifier" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ListGet0WithoutCheck" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LongBitsToDoubleOnInt" enabled="true" level="WARNING" enabled_by_default="true" />
