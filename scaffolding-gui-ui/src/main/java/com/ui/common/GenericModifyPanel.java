@@ -1,8 +1,9 @@
 package com.ui.common;
 
 import lombok.SneakyThrows;
+import scaffolding.gui.common.vo.FunctionDataVO;
 import scaffolding.gui.service.impl.FunctionImpl;
-import scaffolding.gui.service.vo.FunctionDataVO;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

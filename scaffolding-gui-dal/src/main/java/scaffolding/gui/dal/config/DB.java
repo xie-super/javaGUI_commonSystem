@@ -14,20 +14,20 @@ public class DB {
     private static String databaseName ;
     private static String username ;
     private static String password ;
+    private static Connection conn = null;
     static {
-
         databaseName = "dormitories_system";
         username = "dormitories_system";
         password = "dAxrwXchtSM7YYNB";
     }
     public static Connection getConn() {
+        if(conn!=null){
+            return conn;
+        }
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = String.format("jdbc:mysql://8.141.119.45:3306/%s?serverTimezone=UTC", databaseName);
-
-
-        Connection conn = null;
         try {
-            Class.forName(driver); //classLoader,加载对应驱动
+            Class.forName(driver);
             conn = (Connection) DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -37,6 +37,17 @@ public class DB {
         return conn;
     }
 
+    public static void closeQuietly(AutoCloseable... closeables) {
+        for (AutoCloseable closeable : closeables) {
+            if (closeable != null) {
+                try {
+                    closeable.close();
+                } catch (Exception ignored) {
+                   log.error("close error",ignored);
+                }
+            }
+        }
+    }
 
 
 
