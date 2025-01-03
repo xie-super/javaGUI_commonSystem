@@ -22,7 +22,7 @@ public class GenUtil {
         typeMapping.put("text", "String");
         typeMapping.put("int", "Integer");
         typeMapping.put("integer", "Integer");
-        typeMapping.put("tinyint", "integer");
+        typeMapping.put("tinyint", "Integer");
         typeMapping.put("smallint", "Short");
         typeMapping.put("bigint", "Long");
         typeMapping.put("float", "BigDecimal");

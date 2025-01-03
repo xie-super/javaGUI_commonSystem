@@ -12,13 +12,16 @@ import ${import};
  */
 
 @Data
-public class ${ClassName}
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ${ClassName} implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
     /** $column.columnComment */
-    @@FieldDescription(name = "${columnName}",description = "${columnComment}")
+    @FieldDescription(name = "$column.columnName",description = "$column.columnComment")
     private $column.javaType $column.javaField;
 
 #end

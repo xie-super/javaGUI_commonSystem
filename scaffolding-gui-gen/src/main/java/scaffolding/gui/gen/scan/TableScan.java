@@ -1,22 +1,16 @@
 package scaffolding.gui.gen.scan;
 
-import org.apache.commons.lang3.StringUtils;
 import scaffolding.gui.common.util.TransferStringUtils;
-import scaffolding.gui.dal.config.DB;
 import scaffolding.gui.gen.entity.GenTable;
 import scaffolding.gui.gen.entity.GenTableColumn;
 import scaffolding.gui.gen.utils.GenUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import org.apache.commons.lang3.StringUtils;
-
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static scaffolding.gui.dal.config.DB.closeQuietly;
 import static scaffolding.gui.dal.config.DB.getConn;
