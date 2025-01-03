@@ -101,7 +101,6 @@ public class DB {
             return false;
         } catch (SQLException | IllegalAccessException e) {
             e.printStackTrace();
-            // 输出SQL异常信息
             System.err.println("SQL Exception: " + e.getMessage());
             return false;
         } finally {

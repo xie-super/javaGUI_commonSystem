@@ -1,6 +1,7 @@
 package com.ui.view;
 
 import scaffolding.gui.common.util.JsonParser;
+import scaffolding.gui.common.vo.FunctionDataVO;
 import scaffolding.gui.service.impl.FunctionImpl;
 import scaffolding.gui.start.init.UserConfig;
 import scaffolding.gui.start.init.UserConfig.User.Function;

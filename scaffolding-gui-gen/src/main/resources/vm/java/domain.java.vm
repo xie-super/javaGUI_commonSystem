@@ -13,6 +13,7 @@ import ${import};
 
 @Data
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class ${ClassName} implements Serializable
