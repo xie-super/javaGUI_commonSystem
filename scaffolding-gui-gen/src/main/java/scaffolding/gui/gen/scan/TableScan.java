@@ -23,7 +23,8 @@ public class TableScan {
         Statement stmt = conn.createStatement();
         // 查询表名及注释
         ResultSet rs = stmt.executeQuery(
-                "SELECT TABLE_NAME, TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE()"
+                "SELECT TABLE_NAME, TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES " +
+                        "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_TYPE = 'BASE TABLE'"
         );
 
         List<GenTable> tableInfos = new ArrayList<>();

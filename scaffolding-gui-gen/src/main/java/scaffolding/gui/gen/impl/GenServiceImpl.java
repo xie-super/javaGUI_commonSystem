@@ -33,15 +33,23 @@ public class GenServiceImpl {
         return Objects.requireNonNull(getClass().getResource("")).getPath();
     }
 
+    public void genAllEntities() throws Exception {
+        List<GenTable> tableInfos = TableScan.getAllTableInfos();
+        for (GenTable genTable : tableInfos) {
+            genEntityFromGenTable(genTable);
+        }
+    }
     public void genEntityByTableName(String tableName) throws Exception {
-
         GenTable genTable = TableScan.getTableInfoByTableName(tableName);
+        genEntityFromGenTable(genTable);
+    }
+
+    private void genEntityFromGenTable(GenTable genTable) throws Exception {
         VelocityInitializer.initVelocity();
         VelocityContext context = VelocityUtils.prepareContext(Objects.requireNonNull(genTable));
 
         List<String> templates = VelocityUtils.getTemplateList();
-        for (String template : templates)
-        {
+        for (String template : templates) {
             // 渲染模板
             StringWriter sw = new StringWriter();
             Template tpl = Velocity.getTemplate(template, Constants.UTF8);
@@ -50,21 +58,20 @@ public class GenServiceImpl {
                 String currentDirectory = System.getProperty("user.dir");
                 String targetDirectory = currentDirectory + File.separator + "scaffolding-gui-dal" + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "scaffolding" + File.separator + "gui" + File.separator + "dal" + File.separator + "entity" + File.separator;
                 File outputFile = new File(targetDirectory + genTable.getClassName() + ".java");
-            try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
-                writer.write(sw.toString());
+                try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(outputFile.toPath()), StandardCharsets.UTF_8)) {
+                    writer.write(sw.toString());
+                }
+            } catch (IOException e) {
+                log.error("渲染模板失败，表名：" + genTable.getTableName(), e);
             }
-        } catch (IOException e) {
-            log.error("渲染模板失败，表名：" + genTable.getTableName(), e);
         }
-        }
-
     }
 
     public static void main(String[] args) {
 
         GenServiceImpl genService = new GenServiceImpl();
         try {
-            genService.genEntityByTableName("student");
+            genService.genAllEntities();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

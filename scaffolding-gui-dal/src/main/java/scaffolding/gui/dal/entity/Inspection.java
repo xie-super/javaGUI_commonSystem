@@ -1,25 +1,44 @@
 package scaffolding.gui.dal.entity;
 
-import lombok.Data;
+import java.util.Date;
 import scaffolding.gui.dal.annotation.FieldDescription;
+import lombok.*;
+import java.io.Serializable;
 
+/**
+ * 宿舍检查记录
+ *
+ * @author lb
+ * @date 2025-01-03 12:02:22
+ */
 
 @Data
-public class Inspection {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Inspection implements Serializable
+{
+    private static final long serialVersionUID = 1L;
 
-    @FieldDescription(description = "检查记录 ID")
-    private int inspectionId;
+    /** 检查记录编号 */
+    @FieldDescription(name = "inspectionId",description = "检查记录编号")
+    private Integer inspectionId;
 
-    @FieldDescription(description = "宿舍 ID")
+    /** 宿舍编号 */
+    @FieldDescription(name = "dormId",description = "宿舍编号")
     private String dormId;
 
-    @FieldDescription(description = "检查员")
+    /** 检查人 */
+    @FieldDescription(name = "inspector",description = "检查人")
     private String inspector;
 
-    @FieldDescription(description = "检查日期")
-    private java.sql.Date inspectionDate;
+    /** 检查日期 */
+    @FieldDescription(name = "inspectionDate",description = "检查日期")
+    private Date inspectionDate;
 
-    @FieldDescription(description = "备注")
+    /** 备注 */
+    @FieldDescription(name = "remarks",description = "备注")
     private String remarks;
+
 
 }

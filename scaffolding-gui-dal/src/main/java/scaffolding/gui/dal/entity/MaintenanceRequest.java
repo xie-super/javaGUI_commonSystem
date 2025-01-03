@@ -1,27 +1,48 @@
 package scaffolding.gui.dal.entity;
 
-import lombok.Data;
+import java.util.Date;
 import scaffolding.gui.dal.annotation.FieldDescription;
+import lombok.*;
+import java.io.Serializable;
+
+/**
+ * 维修请求记录
+ *
+ * @author lb
+ * @date 2025-01-03 12:02:22
+ */
 
 @Data
-public class MaintenanceRequest { 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MaintenanceRequest implements Serializable
+{
+    private static final long serialVersionUID = 1L;
 
-    @FieldDescription(description = "维修请求 ID")
-    private int requestId;
+    /** 维修请求编号 */
+    @FieldDescription(name = "requestId",description = "维修请求编号")
+    private Integer requestId;
 
-    @FieldDescription(description = "宿舍 ID")
+    /** 宿舍编号 */
+    @FieldDescription(name = "dormId",description = "宿舍编号")
     private String dormId;
 
-    @FieldDescription(description = "问题描述")
+    /** 问题描述 */
+    @FieldDescription(name = "issueDescription",description = "问题描述")
     private String issueDescription;
 
-    @FieldDescription(description = "请求日期")
-    private java.sql.Date requestDate;
+    /** 请求日期 */
+    @FieldDescription(name = "requestDate",description = "请求日期")
+    private Date requestDate;
 
-    @FieldDescription(description = "维修状态")
+    /** 状态 */
+    @FieldDescription(name = "status",description = "状态")
     private String status;
 
-    @FieldDescription(description = "解决日期")
-    private java.sql.Date resolvedDate;
+    /** 解决日期 */
+    @FieldDescription(name = "resolvedDate",description = "解决日期")
+    private Date resolvedDate;
+
 
 }
