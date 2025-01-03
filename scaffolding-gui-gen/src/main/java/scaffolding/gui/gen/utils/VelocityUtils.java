@@ -17,23 +17,11 @@ import java.util.*;
  */
 public class VelocityUtils
 {
-    public static List<String> getTemplateList(String tplCategory, String tplWebType)
+    public static List<String> getTemplateList()
     {
-        String useWebType = "vm/vue";
-        if ("element-plus".equals(tplWebType))
-        {
-            useWebType = "vm/vue/v3";
-        }
+
         List<String> templates = new ArrayList<String>();
         templates.add("vm/java/domain.java.vm");
-        templates.add("vm/java/mapper.java.vm");
-        templates.add("vm/java/service.java.vm");
-        templates.add("vm/java/serviceImpl.java.vm");
-        templates.add("vm/java/controller.java.vm");
-        templates.add("vm/xml/mapper.xml.vm");
-        templates.add("vm/sql/sql.vm");
-        templates.add("vm/js/api.js.vm");
-
         return templates;
     }
 
@@ -81,75 +69,8 @@ public class VelocityUtils
     }
 
 
-    /**
-     * 获取文件名
-     *//*
-    public static String getFileName(String template, GenTable genTable)
-    {
-        // 文件名称
-        String fileName = "";
-        // 包路径
-        String packageName = genTable.getPackageName();
-        // 模块名
-        String moduleName = genTable.getModuleName();
-        // 大写类名
-        String className = genTable.getClassName();
-        // 业务名称
-        String businessName = genTable.getBusinessName();
 
-        String javaPath = PROJECT_PATH + "/" + StringUtils.replace(packageName, ".", "/");
-        String mybatisPath = MYBATIS_PATH + "/" + moduleName;
-        String vuePath = "vue";
-
-        if (template.contains("domain.java.vm"))
-        {
-            fileName = StringUtils.format("{}/domain/{}.java", javaPath, className);
-        }
-        if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory()))
-        {
-            fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
-        }
-        else if (template.contains("mapper.java.vm"))
-        {
-            fileName = StringUtils.format("{}/mapper/{}Mapper.java", javaPath, className);
-        }
-        else if (template.contains("service.java.vm"))
-        {
-            fileName = StringUtils.format("{}/service/I{}Service.java", javaPath, className);
-        }
-        else if (template.contains("serviceImpl.java.vm"))
-        {
-            fileName = StringUtils.format("{}/service/impl/{}ServiceImpl.java", javaPath, className);
-        }
-        else if (template.contains("controller.java.vm"))
-        {
-            fileName = StringUtils.format("{}/controller/{}Controller.java", javaPath, className);
-        }
-        else if (template.contains("mapper.xml.vm"))
-        {
-            fileName = StringUtils.format("{}/{}Mapper.xml", mybatisPath, className);
-        }
-        else if (template.contains("sql.vm"))
-        {
-            fileName = businessName + "Menu.sql";
-        }
-        else if (template.contains("api.js.vm"))
-        {
-            fileName = StringUtils.format("{}/api/{}/{}.js", vuePath, moduleName, businessName);
-        }
-        else if (template.contains("index.vue.vm"))
-        {
-            fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
-        }
-        else if (template.contains("index-tree.vue.vm"))
-        {
-            fileName = StringUtils.format("{}/views/{}/{}/index.vue", vuePath, moduleName, businessName);
-        }
-        return fileName;
-    }
-
-
-    *//**
+   /*//**
      * 根据列类型获取字典组
      * 
      * @param genTable 业务表对象

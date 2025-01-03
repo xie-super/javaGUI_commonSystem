@@ -50,6 +50,39 @@ public class TableScan {
         return tableInfos;
     }
 
+    public static GenTable getTableInfoByTableName(String tableName) throws Exception {
+        if (tableName == null || tableName.isEmpty()) {
+            throw new IllegalArgumentException("tableName cannot be null or empty");
+        }
+
+        Connection conn = getConn();
+        PreparedStatement pstmt = conn.prepareStatement(
+                "SELECT TABLE_NAME, TABLE_COMMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?"
+        );
+        pstmt.setString(1, tableName);
+
+        ResultSet rs = pstmt.executeQuery();
+        if (!rs.next()) {
+            closeQuietly(rs);
+            closeQuietly(pstmt);
+            closeQuietly(conn);
+            return null;
+        }
+
+        String tableComment = rs.getString("TABLE_COMMENT");
+        GenTable genTable = GenTable.builder()
+                .tableName(tableName)
+                .tableComment(tableComment)
+                .className(TransferStringUtils.toPascalCase(tableName))
+                .build();
+        genTable.setColumns(getColumnInfo(tableName));
+
+        closeQuietly(rs);
+        closeQuietly(pstmt);
+        closeQuietly(conn);
+        return genTable;
+    }
+
 
     public static List<GenTableColumn> getColumnInfo(String tableName) throws Exception {
         Connection conn = getConn();
