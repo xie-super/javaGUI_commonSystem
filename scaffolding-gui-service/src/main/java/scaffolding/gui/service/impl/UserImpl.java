@@ -46,7 +46,6 @@ public class UserImpl {
         Field passwordField = userClass.getDeclaredField("password");
         usernameField.setAccessible(true);
         passwordField.setAccessible(true);
-
         usernameField.set(user, username);
         passwordField.set(user, password);
         List<Object> userList = DB.select(user, dbUserName, "password");

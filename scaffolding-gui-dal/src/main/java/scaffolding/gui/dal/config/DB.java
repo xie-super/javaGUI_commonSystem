@@ -67,7 +67,7 @@ public class DB {
             StringBuilder values = new StringBuilder(") VALUES (");
             for (Field field : fields) {
                 //传入类变量只有有值才能更新，获取有值的变量
-                field.setAccessible(true); // 设置字段可访问
+                field.setAccessible(true);
                 Object value = field.get(entity);
                 if (value != null) {
                     sql.append(field.getName()).append(",");
@@ -87,7 +87,7 @@ public class DB {
 
             int parameterIndex = 1;
             for (Field field : fields) {
-                field.setAccessible(true); // 设置字段可访问
+                field.setAccessible(true);
                 Object value = field.get(entity);
 
                 if (value != null) {
@@ -141,7 +141,7 @@ public class DB {
 
             int parameterIndex = 1;
             for (Field field : fields) {
-                field.setAccessible(true); // 设置字段可访问
+                field.setAccessible(true); 
                 Object value = field.get(entity);
 
                 if (value != null) {
@@ -151,7 +151,7 @@ public class DB {
 
             // 设置 WHERE 子句的参数
             Field targetField = entity.getClass().getDeclaredField(fieldName);
-            targetField.setAccessible(true); // 设置字段可访问
+            targetField.setAccessible(true); 
             Object targetValue = targetField.get(entity);
             preparedStatement.setObject(parameterIndex, targetValue);
 
@@ -165,7 +165,7 @@ public class DB {
             e.printStackTrace();
             // 输出SQL异常信息
             System.err.println("SQL Exception: " + e.getMessage());
-            return false; // 返回插入失败的标志
+            return false;
         } finally {
             connection.close();
         }
@@ -206,7 +206,7 @@ public class DB {
                 if (!fieldNames[i].isEmpty()) {
                     // 通过反射获取实体对象的字段值
                     Field field = entity.getClass().getDeclaredField(fieldNames[i]);
-                    field.setAccessible(true); // 设置字段可访问
+                    field.setAccessible(true);
                     Object value = field.get(entity);
 
                     preparedStatement.setObject(i + 1, value);
@@ -224,7 +224,7 @@ public class DB {
                 T resultEntity = (T) entity.getClass().getDeclaredConstructor().newInstance();
                 Field[] fields = resultEntity.getClass().getDeclaredFields();
                 for (Field resultField : fields) {
-                    resultField.setAccessible(true); // 设置字段可访问
+                    resultField.setAccessible(true); 
                     Object resultValue = resultSet.getObject(resultField.getName());
                     resultField.set(resultEntity, resultValue);
                 }
@@ -266,7 +266,7 @@ public class DB {
 
             // 通过反射获取实体对象的字段值
             Field field = entity.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true); // 设置字段可访问
+            field.setAccessible(true); 
             Object value = field.get(entity);
             System.out.println(value.toString());
             preparedStatement.setObject(1, value);
