@@ -3,12 +3,14 @@ package scaffolding.gui.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.codehaus.plexus.util.StringUtils;
-import scaffolding.gui.dal.config.DB;
+import scaffolding.gui.common.util.JsonParser;
+import scaffolding.gui.common.util.TransferStringUtils;
+import scaffolding.gui.dal.database.DatabaseConnector;
+import scaffolding.gui.dal.database.factory.DataBaseFactory;
 import scaffolding.gui.service.utils.CookieUtils;
-import scaffolding.gui.start.JsonParser;
 import scaffolding.gui.start.init.UserConfig;
-import scaffolding.gui.start.util.TransferStringUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -17,7 +19,14 @@ import java.util.List;
  */
 @Slf4j
 public class UserImpl {
-
+    private static DatabaseConnector databaseConnector;
+    static{
+        try {
+            databaseConnector = DataBaseFactory.getConnector();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public boolean login(String roleName, String username, String password) throws Exception {
         UserConfig userConfig = JsonParser.parseUserConfig();
         CookieUtils cookieUtils = CookieUtils.getInstance();
@@ -48,7 +57,7 @@ public class UserImpl {
         passwordField.setAccessible(true);
         usernameField.set(user, username);
         passwordField.set(user, password);
-        List<Object> userList = DB.select(user, dbUserName, "password");
+        List<Object> userList = databaseConnector.select(user, dbUserName, "password");
         if (CollectionUtils.isNotEmpty(userList)) {
             cookieUtils.setUsername(username);
             return true;

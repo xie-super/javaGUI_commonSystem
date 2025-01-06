@@ -1,7 +1,8 @@
-package scaffolding.gui.dal.config;
+package scaffolding.gui.dal.database;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,10 +13,18 @@ public interface DatabaseConnector {
     Connection getConnection() throws IOException;
     void closeConnection();
     void closeQuietly(AutoCloseable... closeable);
-    <T> boolean insert(T entity);
 
-    // 通用的 update 方法，传入的是实体以及字段名（根据该字段找数据）
-    <T> boolean update(T entity, String fieldName);
+
+    /**
+     * 通用 insert 方法，插入传入的entity
+     */
+    <T> boolean insert(T entity) throws SQLException;
+
+    /**
+     * 通用 update 方法，传入类型实例，以及 where后的限制字段
+     * update  (entity的类名) set 遍历entity where fieldName = (entity实例的fieldName值)返回传入类型的链表 (AND...)
+     */
+    <T> boolean update(T entity, String... fieldNames) throws SQLException;
 
     /**
      * 通用 select 方法，传入类型实例，以及 where后的限制字段
@@ -27,9 +36,8 @@ public interface DatabaseConnector {
     /**
      * 通用 delete 方法，传入类型实例，以及 where后的限制字段
      * delete from (entity的类名) where fieldName = (entity实例的fieldName值)返回传入类型的链表 (AND...)
-     * 若field 为null 则返回表中所有记录
      */
-    <T> boolean delete(T entity, String fieldName);
+    <T> boolean delete(T entity, String... fieldNames);
 
 
 }

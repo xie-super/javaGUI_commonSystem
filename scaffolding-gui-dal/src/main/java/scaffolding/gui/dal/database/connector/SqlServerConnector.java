@@ -1,8 +1,8 @@
-package scaffolding.gui.dal.config.connector;
+package scaffolding.gui.dal.database.connector;
 
 import lombok.extern.slf4j.Slf4j;
 import scaffolding.gui.common.util.ConfigManager;
-import scaffolding.gui.dal.config.DatabaseConnector;
+import scaffolding.gui.dal.database.DatabaseConnector;
 
 import java.io.IOException;
 import java.sql.Connection;

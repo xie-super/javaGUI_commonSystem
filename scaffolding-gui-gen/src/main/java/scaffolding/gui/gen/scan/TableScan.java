@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static scaffolding.gui.dal.config.DB.closeQuietly;
-import static scaffolding.gui.dal.config.DB.getConn;
+import static scaffolding.gui.dal.database.DB.closeQuietly;
+import static scaffolding.gui.dal.database.DB.getConn;
 
 public class TableScan {
 

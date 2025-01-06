@@ -20,6 +20,12 @@ public class Constants
      */
     public static final String GBK = "GBK";
 
+    //database type
+    public interface DatabaseType {
+        String MYSQL = "mysql";
+        String SQLSERVER = "sqlserver";
+    }
+
     /**
      * 系统语言
      */

@@ -1,15 +1,19 @@
 package scaffolding.gui.service.impl;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scaffolding.gui.common.util.TransferStringUtils;
 import scaffolding.gui.common.vo.FunctionDataVO;
 import scaffolding.gui.dal.annotation.AnnotationUtils;
-import scaffolding.gui.dal.config.DB;
+import scaffolding.gui.dal.database.DatabaseConnector;
+import scaffolding.gui.dal.database.factory.DataBaseFactory;
 import scaffolding.gui.service.utils.CookieUtils;
 
 import scaffolding.gui.start.init.UserConfig;
 
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -20,7 +24,16 @@ import java.util.*;
  * @author lb
  */
 public class FunctionImpl {
+    private static final DatabaseConnector databaseConnector;
+    private static final Logger log = LoggerFactory.getLogger(FunctionImpl.class);
 
+    static {
+        try {
+            databaseConnector = DataBaseFactory.getConnector();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * @Param functionName 功能名称，用于定位到当前登录角色所选Function
      * @Param condition 键为表字段名，值为对应字段的筛选值
@@ -63,7 +76,7 @@ public class FunctionImpl {
                     field.set(entity, value);
                     argsList.add(value);
                 }
-                List<List<Object>> dataList = convertToListOfObjectLists(DB.select(entity, argsList.toArray(new String[0])));
+                List<List<Object>> dataList = convertToListOfObjectLists(databaseConnector.select(entity, argsList.toArray(new String[0])));
                 functionDataVO.setDataList(dataList);
             }catch (Exception e) {
                 throw new RuntimeException(e);
@@ -87,9 +100,9 @@ public class FunctionImpl {
                 field.set(entity, convertValue(newValues[i],field.getType()));
             }
             // 保存实体，调用你的 DAO 层逻辑
-            DB.insert(entity);
+            databaseConnector.insert(entity);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("insertEntity error", e);
         }
     }
     public void updateEntity(String tableName, String[] newValues) {
@@ -103,9 +116,9 @@ public class FunctionImpl {
                 field.setAccessible(true);
                 field.set(entity, convertValue(newValues[i],field.getType()));
             }
-            DB.update(entity, fields[0].getName());
+            databaseConnector.update(entity, fields[0].getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("updateEntity error", e);
         }
     }
     public void deleteEntity(String tableName, String key) {
@@ -117,9 +130,9 @@ public class FunctionImpl {
             Field field = fields[0];
             field.setAccessible(true);
             field.set(entity, convertValue(key,field.getType()));
-            DB.delete(entity, fields[0].getName());
+            databaseConnector.delete(entity, fields[0].getName());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("deleteEntity error", e);
         }
     }
 
