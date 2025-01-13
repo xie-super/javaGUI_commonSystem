@@ -55,7 +55,10 @@ public class UserImpl {
         Field passwordField = userClass.getDeclaredField("password");
         usernameField.setAccessible(true);
         passwordField.setAccessible(true);
-        usernameField.set(user, username);
+
+        Class<?> fieldType = usernameField.getType();
+        Object convertedValue = convertToFieldType(username, fieldType);
+        usernameField.set(user, convertedValue);
         passwordField.set(user, password);
         List<Object> userList = databaseConnector.select(user, dbUserName, "password");
         if (CollectionUtils.isNotEmpty(userList)) {
@@ -64,6 +67,25 @@ public class UserImpl {
         }
         cookieUtils.destroy();
         return false;
+    }
+
+    private static Object convertToFieldType(String value, Class<?> fieldType) throws Exception {
+        if (fieldType == String.class) {
+            return value;
+        } else if (fieldType == Integer.class || fieldType == int.class) {
+            return Integer.valueOf(value);
+        } else if (fieldType == Short.class || fieldType == short.class) {
+            return Short.valueOf(value);
+        } else if (fieldType == Long.class || fieldType == long.class) {
+            return Long.valueOf(value);
+        } else if (fieldType == java.math.BigDecimal.class) {
+            return new java.math.BigDecimal(value);
+        } else if (fieldType == java.util.Date.class) {
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            return dateFormat.parse(value);
+        } else {
+            throw new IllegalArgumentException("Unsupported field type: " + fieldType);
+        }
     }
 
     public static void main(String[] args) throws Exception {

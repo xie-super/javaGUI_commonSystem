@@ -111,7 +111,7 @@ public class MysqlConnector implements DatabaseConnector {
             throw new RuntimeException(e);
         } finally {
             closeQuietly(preparedStatement);
-            closeConnection();
+
         }
     }
 
@@ -184,7 +184,7 @@ public class MysqlConnector implements DatabaseConnector {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            closeConnection();
+
             closeQuietly(preparedStatement);
         }
     }
@@ -245,7 +245,7 @@ public class MysqlConnector implements DatabaseConnector {
             throw new RuntimeException(e);
         } finally {
             closeQuietly(resultSet, preparedStatement);
-            closeConnection();
+
         }
     }
 
@@ -285,7 +285,7 @@ public class MysqlConnector implements DatabaseConnector {
         } catch (SQLException | IllegalAccessException | NoSuchFieldException | IOException e) {
             throw new RuntimeException(e);
         } finally {
-            closeConnection();
+
             closeQuietly(preparedStatement);
         }
     }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @description 工厂方法具体Product，sqlserver连接器
@@ -48,5 +49,30 @@ public class SqlServerConnector implements DatabaseConnector {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void closeQuietly(AutoCloseable... closeable) {
+
+    }
+
+    @Override
+    public <T> boolean insert(T entity) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public <T> boolean update(T entity, String... fieldNames) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public <T> List<T> select(T entity, String... fieldNames) {
+        return null;
+    }
+
+    @Override
+    public <T> boolean delete(T entity, String... fieldNames) {
+        return false;
     }
 }

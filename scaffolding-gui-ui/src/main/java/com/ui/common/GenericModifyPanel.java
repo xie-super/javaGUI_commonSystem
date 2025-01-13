@@ -150,11 +150,7 @@ public class GenericModifyPanel {
 ////            @Override
 ////            public void run() {
 ////                String[] heard = {"id", "name", "sex", "clazz", "password"};
-////                Gen<Student> modifyPanel = new Gen<>();
-////                Student student = new Student(); // Create an instance of Student (you might need to set some values)
 ////
-////                student.setSex("男");
-////                modifyPanel.show(heard, student, "sex");
 ////            }
 //        });
     }

@@ -1,6 +1,7 @@
 package com.ui.common;
-import com.util.data.AttributeMapper;
-import scaffolding.gui.service.vo.FunctionDataVO;
+
+import scaffolding.gui.common.vo.FunctionDataVO;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
