@@ -26,21 +26,5 @@ public class ConfigManager {
     }
 
     public static void main(String[] args) {
-        try {
-            ConfigManager configManager = new ConfigManager("application.properties");
-
-            String projectName = configManager.getProperty("project.name");
-            String dbName = configManager.getProperty("database.name");
-            String dbUsername = configManager.getProperty("database.username");
-            String dbPassword = configManager.getProperty("database.password");
-
-            System.out.println("Project Name: " + projectName);
-            System.out.println("Database Name: " + dbName);
-            System.out.println("Database Username: " + dbUsername);
-            System.out.println("Database Password: " + dbPassword);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 }
